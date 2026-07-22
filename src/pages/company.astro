@@ -61,8 +61,8 @@ const sectionTitleSize = {
     class="container-article section-px py-[clamp(28px,5vw,48px)]"
   >
     <SectionTitle eyebrow="MESSAGE" subLabel="02 — 代表挨拶" {...sectionTitleSize} />
-    <div class="flex flex-wrap gap-10">
-      <div class="min-w-[280px] flex-[1_1_420px]">
+    <div class="flex flex-col gap-10 min-[701px]:flex-row min-[701px]:items-stretch">
+      <div class="order-1 max-[700px]:order-2 min-[701px]:flex-[56_1_0%]">
         <h3 class="m-0 mb-6 text-[clamp(22px,3vw,28px)] leading-[1.5] font-extrabold">
           企業が本来の価値を<br />生み出せる働き方へ。
         </h3>
@@ -70,14 +70,14 @@ const sectionTitleSize = {
           {message.map((para) => <p class="text-muted m-0 text-sm leading-[1.9]">{para}</p>)}
         </div>
       </div>
-      <div class="max-w-[280px] min-w-[200px] flex-[1_1_240px]">
+      <div class="order-2 flex flex-col max-[700px]:order-1 min-[701px]:flex-[44_1_0%]">
         <Image
           src="/images/people/ceo.jpg"
           alt="代表取締役 永田晃大"
           width={675}
           height={900}
           loading="lazy"
-          class="rounded-block h-[340px] w-full object-cover"
+          class="rounded-block min-h-[360px] w-full flex-1 object-cover"
         />
         <div class="mt-3.5 text-right">
           <div class="text-faint text-xs">代表取締役</div>
