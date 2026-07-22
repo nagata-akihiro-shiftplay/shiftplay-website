@@ -1,0 +1,49 @@
+---
+// Stacked service card (README Service page): title+description left, feature tag chips
+// right, full-width colored CTA bar flush to the card's bottom, revealed individually on
+// scroll. The card itself (not just the CTA bar) lifts + gains shadow on hover per README.
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import RevealOnScroll from './RevealOnScroll.astro';
+import TagChip from './TagChip.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  ctaLabel: string;
+  ctaHref: string;
+  ctaVariant?: 'solid' | 'muted';
+}
+
+const { title, description, tags, ctaLabel, ctaHref, ctaVariant = 'muted' } = Astro.props;
+---
+
+<RevealOnScroll
+  as="div"
+  duration={600}
+  class="bg-card rounded-panel relative flex flex-col overflow-hidden transition-shadow duration-200 hover:-translate-y-[3px] hover:shadow-[0_16px_36px_rgba(20,22,28,0.08)]"
+>
+  <div class="flex flex-wrap justify-between gap-7 p-[clamp(24px,4vw,36px)]">
+    <div class="min-w-[220px] flex-[1_1_260px]">
+      <h2 class="m-0 mb-3.5 text-[22px] font-extrabold">{title}</h2>
+      <p class="text-muted m-0 max-w-[380px] text-sm leading-[1.9]">{description}</p>
+    </div>
+    <div class="min-w-[260px] flex-[1_1_300px]">
+      <div class="text-muted mb-3.5 border-b border-[#d9d7d1] pb-2 text-xs font-bold">
+        サービス特徴
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag) => <TagChip class="rounded-md px-2.5 py-1.5 text-xs">{tag}</TagChip>)}
+      </div>
+    </div>
+  </div>
+  <Button
+    href={ctaHref}
+    variant={ctaVariant}
+    class="w-full gap-2.5 px-5 py-5 text-base transition-transform duration-100 active:scale-[0.98]"
+  >
+    {ctaLabel}
+    <Icon name="arrow-right" size={17} />
+  </Button>
+</RevealOnScroll>

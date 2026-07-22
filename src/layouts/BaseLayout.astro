@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+  activeNav?: 'service' | 'company';
+}
+
+const { title, description, ogImage = '/logo.png', noindex = false, activeNav } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = ogImage ? new URL(ogImage, Astro.site) : undefined;
+
+// Lighthouse (render-blocking-insight, 2026-07-22): the Google Fonts stylesheet
+// was blocking first paint by ~1s. Loaded async below via the standard
+// preload+swap pattern, with a <noscript> fallback for JS-disabled clients.
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ShiftPlay" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="ja_JP" />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+  </head>
+  <body class="bg-page text-ink font-sans antialiased">
+    <a
+      href="#main-content"
+      class="focus:bg-accent sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:text-white"
+    >
+      本文へスキップ
+    </a>
+    <div
+      id="page-root"
+      class="min-h-screen translate-y-2.5 overflow-x-hidden opacity-0 transition-[opacity,transform] duration-500 ease-[ease]"
+    >
+      <SiteHeader active={activeNav} />
+      <main id="main-content">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+    <script>
+      // Site-wide page-load fade-in (README: "every page's root wrapper starts at
+      // opacity:0, translateY(10px) ... one animation frame after mount").
+      requestAnimationFrame(() => {
+        const root = document.getElementById('page-root');
+        root?.classList.remove('translate-y-2.5', 'opacity-0');
+        root?.classList.add('translate-y-0', 'opacity-100');
+      });
+    </script>
+  </body>
+</html>

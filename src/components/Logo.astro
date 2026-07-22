@@ -1,0 +1,21 @@
+---
+// Single shared reference for the real ShiftPlay logo (header + footer).
+// width/height set the *display* box; the source PNG's own resolution
+// doesn't matter since object-contain scales it to fit without distortion.
+interface Props {
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const { width = 170, height = 56, class: className } = Astro.props;
+---
+
+<img
+  src="/logo.png"
+  alt="ShiftPlay"
+  width={width}
+  height={height}
+  class:list={['flex-none object-contain', className]}
+  style={{ width: `${width}px`, height: `${height}px` }}
+/>

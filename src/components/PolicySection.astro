@@ -1,0 +1,18 @@
+---
+// Numbered article block (README: Privacy's 第1条〜第7条). Repeats 7x with the same
+// heading+body shape, so it earned a component; the optional bullet list is passed via
+// the default slot (a PolicyList) rather than a boolean prop, since only some articles
+// have one.
+interface Props {
+  title: string;
+  body: string;
+}
+
+const { title, body } = Astro.props;
+---
+
+<div class="mb-8">
+  <h2 class="m-0 mb-3 text-base font-extrabold">{title}</h2>
+  <p class="text-muted m-0 mb-2.5 text-sm leading-[1.9]">{body}</p>
+  <slot />
+</div>

@@ -1,0 +1,17 @@
+---
+// Small bordered pill label (README: "wrapping tag chips" — Service cards, Training
+// features list, etc.). Font-size/radius/padding are NOT baked in here: Service's chips
+// (rounded-md/px-2.5/py-1.5/text-xs) and Training's (rounded-lg/px-4/py-[9px]/text-[13px])
+// differ, so callers supply those via `class` (same reasoning as Button.astro).
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span
+  class:list={['border-border text-ink border bg-white font-semibold whitespace-nowrap', className]}
+>
+  <slot />
+</span>

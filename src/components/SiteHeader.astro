@@ -1,0 +1,110 @@
+---
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { mainNavItems } from '../data/nav';
+
+interface Props {
+  active?: 'service' | 'company';
+}
+
+const { active } = Astro.props;
+
+const navCtaBase =
+  'gap-[7px] rounded-lg py-2.5 text-sm transition-[background-color,transform] duration-150 active:scale-[0.96]';
+const mobileCtaBase =
+  'flex-1 rounded-lg px-[6px] py-[13px] text-center text-sm transition-transform duration-100 active:scale-[0.96]';
+---
+
+<header
+  id="site-header"
+  data-scrolled="false"
+  class="group border-border bg-page/92 sticky top-0 z-50 border-b backdrop-blur"
+>
+  <div
+    class="container-full section-px flex items-center justify-between gap-5 py-4 transition-[padding] duration-200 ease-out group-data-[scrolled=true]:py-[10px]"
+  >
+    <a href="/" class="flex items-center no-underline">
+      <Logo width={170} height={56} />
+    </a>
+
+    <nav class="hidden items-center gap-[clamp(14px,3vw,36px)] min-[861px]:flex">
+      {
+        mainNavItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'hover:text-accent text-[15px] no-underline',
+              active === item.key ? 'text-accent font-extrabold' : 'text-ink font-medium',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <Button href="/download" variant="outline" class={`${navCtaBase} px-[18px]`}>
+        <Icon slot="icon" name="download" />資料ダウンロード
+      </Button>
+      <Button href="/contact" variant="solid" class={`${navCtaBase} px-5`}>
+        <Icon slot="icon" name="mail" />お問い合わせ
+      </Button>
+    </nav>
+
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      aria-label="メニューを開閉する"
+      aria-expanded="false"
+      aria-controls="mobile-menu-panel"
+      class="border-border flex h-11 w-11 flex-none flex-col items-center justify-center gap-[5px] rounded-lg border bg-white transition-transform duration-100 active:scale-[0.96] min-[861px]:hidden"
+    >
+      <span class="bg-ink h-[2px] w-5"></span>
+      <span class="bg-ink h-[2px] w-5"></span>
+      <span class="bg-ink h-[2px] w-5"></span>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu-panel"
+    class="border-border hidden flex-col gap-[2px] border-t bg-white px-[clamp(20px,5vw,56px)] pt-[18px] pb-[26px] min-[861px]:hidden!"
+  >
+    {
+      mainNavItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'border-border-soft border-b px-1 py-[14px] text-base no-underline',
+            active === item.key ? 'text-accent font-extrabold' : 'text-ink font-medium',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <div class="mt-[14px] flex flex-row flex-nowrap gap-[10px]">
+      <Button href="/download" variant="outline" class={mobileCtaBase}> 資料ダウンロード </Button>
+      <Button href="/contact" variant="solid" class={mobileCtaBase}> お問い合わせ </Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const panel = document.getElementById('mobile-menu-panel');
+
+  const onScroll = () => {
+    if (!header) return;
+    header.dataset.scrolled = String(window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  toggle?.addEventListener('click', () => {
+    if (!panel) return;
+    const willOpen = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !willOpen);
+    panel.classList.toggle('flex', willOpen);
+    toggle.setAttribute('aria-expanded', String(willOpen));
+  });
+</script>

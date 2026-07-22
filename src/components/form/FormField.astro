@@ -1,0 +1,48 @@
+---
+// Label row (+ optional "必須" badge, + optional hint line) wrapping a form control.
+// Used identically by Download and Contact (README: both forms share this label/required
+// pattern for every field).
+//
+// QA fix: the label text used to be a plain <span>, with no programmatic association to
+// the field (no `for`/`id`, no `<fieldset>`) — screen readers couldn't announce it when
+// the control got focus. Pass `for` (matching the control's `id`, which Input/Textarea
+// set to their `name`) for a single control, or `fieldset` for a radio group (a `for`
+// pointing at one of several same-name radios wouldn't reliably do anything useful).
+interface Props {
+  label: string;
+  required?: boolean;
+  hint?: string;
+  labelRowClass?: string;
+  for?: string;
+  fieldset?: boolean;
+}
+
+const { label, required = false, hint, labelRowClass, for: forId, fieldset = false } = Astro.props;
+const rowClass = labelRowClass ?? (hint ? 'mb-1.5' : 'mb-2.5');
+---
+
+{
+  fieldset ? (
+    <fieldset class="m-0 border-0 p-0">
+      <legend class:list={['flex items-center gap-2 p-0', rowClass]}>
+        <span class="text-sm font-bold">{label}</span>
+        {required && (
+          <span class="bg-error rounded px-2 py-[3px] text-[11px] font-bold text-white">必須</span>
+        )}
+      </legend>
+      {hint && <p class="text-error mb-2.5 text-xs">{hint}</p>}
+      <slot />
+    </fieldset>
+  ) : (
+    <div>
+      <label for={forId} class:list={['flex items-center gap-2', rowClass]}>
+        <span class="text-sm font-bold">{label}</span>
+        {required && (
+          <span class="bg-error rounded px-2 py-[3px] text-[11px] font-bold text-white">必須</span>
+        )}
+      </label>
+      {hint && <p class="text-error mb-2.5 text-xs">{hint}</p>}
+      <slot />
+    </div>
+  )
+}

@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GhostHeading from '../../components/GhostHeading.astro';
+import AnchorNav from '../../components/AnchorNav.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import TagChip from '../../components/TagChip.astro';
+import StepCard from '../../components/StepCard.astro';
+import FaqItem from '../../components/FaqItem.astro';
+import CTASection from '../../components/CTASection.astro';
+import RevealOnScroll from '../../components/RevealOnScroll.astro';
+import Divider from '../../components/Divider.astro';
+
+const quickNav = [
+  { num: '01', label: '解決できる課題', href: '#problem' },
+  { num: '02', label: '提供メニュー', href: '#menu' },
+  { num: '03', label: '特徴', href: '#features' },
+  { num: '04', label: 'サービスの流れ', href: '#flow' },
+  { num: '05', label: 'よくある質問', href: '#faq' },
+];
+
+const problems = [
+  '社内の生成AIの活用率をあげたい',
+  'どの生成AIツールを導入すべきか相談したい',
+  'そもそも生成AIでどんなことができるのか知りたい',
+];
+
+const menu = [
+  '1回単発でのAI研修',
+  '3ヶ月〜6ヶ月にわたる本格的なAI研修&ワークショップ',
+  'スポットでの生成AIに関する活用相談(外部顧問)',
+];
+
+const features = [
+  'カスタマイズ可能',
+  'ワークショップ形式',
+  '各種AIツール対応',
+  '短期/長期',
+  '導入支援も実施',
+];
+
+const flow = [
+  {
+    num: '01',
+    title: 'お問い合わせ',
+    description:
+      'お問い合わせフォームよりご依頼内容をご記入の上、お問い合わせください。担当者よりお打ち合わせの日程をご連絡させていただきます。',
+    ctaHref: '/contact',
+    ctaLabel: 'お問い合わせ',
+  },
+  {
+    num: '02',
+    title: '初回無料ヒアリング',
+    description:
+      '現状の課題や時間のかかっている業務等をお伺いし、研修のプランをご一緒に立てさせていただきます。',
+  },
+  {
+    num: '03',
+    title: 'プランのご提案',
+    description:
+      '初回ヒヤリングにていただいた情報を基に、実際のAI研修の流れや内容をご提案させていただきます。',
+  },
+  {
+    num: '04',
+    title: 'ご契約',
+    description: 'ご提案内容に合意いただけましたら、契約の締結を行わせていただきます。',
+  },
+  {
+    num: '05',
+    title: 'プロジェクト開始',
+    description: '契約締結後、合意いただいたプランを基にプロジェクトを進行します。',
+  },
+];
+
+const faq = [
+  {
+    q: '料金プランについて知りたいのですが？',
+    a: '固定のプランがないため、お客様の課題や取り組み内容によって金額が変わってくるため、ヒヤリングの上ご提案をさせていただく際にお見積もりを提出させていただきます。',
+  },
+  {
+    q: '少人数からでも依頼できますか？',
+    a: 'はい、部署単位など少人数からのご依頼も承っております。まずはお気軽にご相談ください。',
+  },
+  {
+    q: 'オンラインでの実施は可能ですか？',
+    a: '対面・オンラインいずれの形式にも対応しています。ご要望に応じて選択いただけます。',
+  },
+  {
+    q: '研修後のフォローはありますか？',
+    a: 'はい、研修後のちょっとした疑問や相談にも対応するフォロー体制をご用意しています。',
+  },
+  {
+    q: '資料はもらえますか？',
+    a: '研修内容に応じた資料をご用意し、当日配布いたします。',
+  },
+  {
+    q: '1回の研修だけでも意味はありますか？',
+    a: 'はい、一度の研修であっても、生成AIの最低限の基礎を身につけることが可能です。また、社内でAI活用のムード作りのお手伝いができます。勿論、複数回の研修実施が好ましいです。',
+  },
+];
+---
+
+<BaseLayout
+  title="生成AI法人研修｜株式会社ShiftPlay"
+  description="各社の課題に応じてカスタマイズする生成AI法人研修サービスです。解決できる課題、提供メニュー、特徴、サービスの流れ、よくある質問をご紹介します。"
+  activeNav="service"
+>
+  <section class="container-article section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(24px,4vw,40px)]">
+    <GhostHeading
+      watermark="TRAINING"
+      label="生成AI法人研修"
+      watermarkClass="text-[clamp(40px,8vw,76px)]"
+      headingLevel="h1"
+    />
+    <AnchorNav items={quickNav} />
+  </section>
+
+  <section id="problem" class="container-article section-px py-[clamp(28px,5vw,48px)]">
+    <SectionTitle eyebrow="PROBLEM" subLabel="01 — 解決できる課題" />
+    <p class="text-muted m-0 mb-5 text-[15px] leading-[1.9]">以下のような課題を解決いたします。</p>
+    <div class="bg-card rounded-block flex flex-col gap-4 p-[clamp(20px,3vw,32px)]">
+      {
+        problems.map((item) => (
+          <div class="text-ink flex gap-2.5 text-sm leading-[1.8]">
+            <span class="bg-accent mt-[9px] h-1.5 w-1.5 flex-none rounded-full" />
+            <span>{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Divider />
+
+  <RevealOnScroll
+    as="section"
+    id="menu"
+    class="container-article section-px py-[clamp(28px,5vw,48px)]"
+  >
+    <SectionTitle eyebrow="SERVICE MENU" subLabel="02 — 提供メニュー" />
+    <div class="bg-card rounded-block flex flex-col gap-4 p-[clamp(20px,3vw,32px)]">
+      {
+        menu.map((item) => (
+          <div class="text-ink flex gap-2.5 text-sm leading-[1.8]">
+            <span class="bg-accent mt-[9px] h-1.5 w-1.5 flex-none rounded-full" />
+            <span>{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </RevealOnScroll>
+
+  <Divider />
+
+  <RevealOnScroll
+    as="section"
+    id="features"
+    class="container-article section-px py-[clamp(28px,5vw,48px)]"
+  >
+    <SectionTitle eyebrow="FEATURES" subLabel="03 — 特徴" />
+    <div class="flex flex-wrap gap-2.5">
+      {features.map((tag) => <TagChip class="rounded-lg px-4 py-[9px] text-[13px]">{tag}</TagChip>)}
+    </div>
+  </RevealOnScroll>
+
+  <Divider />
+
+  <RevealOnScroll
+    as="section"
+    id="flow"
+    class="container-article section-px py-[clamp(28px,5vw,48px)]"
+  >
+    <SectionTitle eyebrow="FLOW" subLabel="04 — サービスの流れ" />
+    <div class="flex flex-col items-center">
+      {
+        flow.map((step, i) => (
+          <Fragment>
+            <StepCard {...step} />
+            {i < flow.length - 1 && <div class="bg-border h-6 w-1 rounded-sm" />}
+          </Fragment>
+        ))
+      }
+    </div>
+  </RevealOnScroll>
+
+  <Divider />
+
+  <RevealOnScroll
+    as="section"
+    id="faq"
+    class="container-article section-px pt-[clamp(28px,5vw,48px)] pb-[clamp(56px,7vw,80px)]"
+  >
+    <SectionTitle eyebrow="FAQ" subLabel="05 — よくある質問" />
+    <div class="flex flex-col gap-5">
+      {faq.map((item) => <FaqItem question={item.q} answer={item.a} />)}
+    </div>
+  </RevealOnScroll>
+
+  <section class="container-article section-px pb-[clamp(56px,7vw,80px)]">
+    <CTASection
+      heading="生成AI法人研修についてのご相談はこちら"
+      description="まずはお気軽にお問い合わせください。担当者より折り返しご連絡いたします。"
+      ctaLabel="お問い合わせ"
+      ctaHref="/contact"
+    />
+  </section>
+</BaseLayout>

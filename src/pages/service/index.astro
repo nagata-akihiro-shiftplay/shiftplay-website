@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GhostHeading from '../../components/GhostHeading.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const services = [
+  {
+    title: '生成AI法人研修',
+    description:
+      '各社ごとにヒアリングを実施し、企業の課題に応じてカスタマイズした研修を実施中です。AIの導入支援も対応しています。',
+    tags: [
+      'カスタマイズ可能',
+      'ワークショップ形式',
+      '各種AIツール対応',
+      '短期/長期',
+      '導入支援も実施',
+    ],
+    ctaLabel: '詳細を見る',
+    ctaHref: '/service/training',
+    ctaVariant: 'solid' as const,
+  },
+  {
+    title: '伴走型コンサルティング',
+    description:
+      '生成AIを活用したプロジェクトを、チームと共に設計・推進する「伴走支援型コンサルティング」です。スキル共有・AI活用の具体化を通じて、部門全体の生産性向上とチーム基盤の強化を実現します。',
+    tags: [
+      'チーム導入支援',
+      '業務定着コンサル',
+      'AI活用伴走支援',
+      '部門横断スキル共有',
+      '生産性向上サポート',
+    ],
+    ctaLabel: 'お問い合わせはこちら',
+    ctaHref: '/contact',
+    ctaVariant: 'muted' as const,
+  },
+  {
+    title: '顧問サービス',
+    description:
+      '生成AI研修で学んだことを"その場限り"にせず、日常業務に定着させるための伴走サポートを提供します。研修・コンサル後のちょっとした疑問や相談に対応し、AIコンサルタントが即日(営業日中まで)フォローします。',
+    tags: [
+      '即日チャットサポート',
+      '研修・コンサル後のフォローアップ',
+      '月次ミーティングで継続支援',
+    ],
+    ctaLabel: 'お問い合わせはこちら',
+    ctaHref: '/contact',
+    ctaVariant: 'muted' as const,
+  },
+];
+---
+
+<BaseLayout
+  title="事業内容｜株式会社ShiftPlay"
+  description="生成AI法人研修、伴走型コンサルティング、顧問サービスなど、生成AIの研修・導入支援・受託開発に幅広く対応します。"
+  activeNav="service"
+>
+  <section class="container-article section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(24px,4vw,40px)]">
+    <GhostHeading watermark="SERVICE" label="事業内容" />
+    <h1 class="m-0 mb-5 text-[clamp(26px,4vw,38px)] leading-[1.5] font-extrabold">
+      生成AIのことなら<br />何でも相談可能
+    </h1>
+    <p class="text-muted m-0 text-[15px] leading-[1.9]">
+      生成AIの研修は勿論、導入支援や受託開発等にも対応しています。<br
+      />何も決まっていない状態からでもご相談ください。
+    </p>
+  </section>
+
+  <section
+    class="container-article section-px flex flex-col gap-14 pt-[clamp(12px,3vw,24px)] pb-[clamp(56px,7vw,80px)]"
+  >
+    {services.map((service) => <ServiceCard {...service} />)}
+  </section>
+</BaseLayout>

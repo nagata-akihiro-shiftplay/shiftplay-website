@@ -1,0 +1,20 @@
+---
+// `id` set to `name` so FormField's <label for> can point at it (see Input.astro).
+interface Props {
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+}
+
+const { name, placeholder, required = false, rows = 5 } = Astro.props;
+---
+
+<textarea
+  id={name}
+  name={name}
+  rows={rows}
+  placeholder={placeholder}
+  required={required ? 'required' : undefined}
+  class="border-border text-ink w-full resize-y rounded-lg border bg-white px-3.5 py-[13px] text-sm"
+></textarea>

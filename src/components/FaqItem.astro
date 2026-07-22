@@ -1,0 +1,19 @@
+---
+// Q/A pair with bottom border (README: Training's "05 FAQ"). Generic enough to reuse for
+// any future FAQ list elsewhere on the site.
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props;
+---
+
+<div class="border-border border-b pb-5">
+  <div class="mb-2.5 flex gap-2.5 text-[15px] font-bold">
+    <span class="text-accent">Q.</span><span>{question}</span>
+  </div>
+  <div class="text-muted flex gap-2.5 text-sm leading-[1.8]">
+    <span class="text-faint">A.</span><span>{answer}</span>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+---
+// 1px section divider, repeated verbatim (only the container width differs) between
+// Home's sections (container-full) and Training/Company's subsections (container-article).
+interface Props {
+  containerClass?: string;
+}
+
+const { containerClass = 'container-article' } = Astro.props;
+---
+
+<div class:list={[containerClass, 'bg-border h-px']}></div>

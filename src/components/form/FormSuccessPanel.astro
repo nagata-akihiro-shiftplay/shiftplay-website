@@ -1,0 +1,19 @@
+---
+// Byte-identical structure between Download and Contact in the handoff — only the
+// body copy differs, so it's the one prop.
+interface Props {
+  message: string;
+}
+
+const { message } = Astro.props;
+---
+
+<div class="px-2 py-12 text-center">
+  <div
+    class="bg-icon-contact text-accent mx-auto mb-[22px] flex h-[60px] w-[60px] items-center justify-center rounded-full text-[26px]"
+  >
+    ✓
+  </div>
+  <h2 class="m-0 mb-3 text-[21px] font-extrabold">送信しました</h2>
+  <p class="text-muted m-0 text-sm leading-[1.8]">{message}</p>
+</div>

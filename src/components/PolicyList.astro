@@ -1,0 +1,12 @@
+---
+// Bulleted list used inside some PolicySection articles (README: Privacy 第1〜3条).
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="m-0 flex flex-col gap-1.5 pl-5">
+  {items.map((item) => <li class="text-muted text-sm leading-[1.8]">{item}</li>)}
+</ul>

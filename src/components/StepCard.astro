@@ -1,0 +1,41 @@
+---
+// Numbered flow step card (README: Training's "04 FLOW", STEP 01-05). Generic enough to
+// reuse for any future numbered-steps section (e.g. a similar flow on another service page).
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  num: string;
+  title: string;
+  description: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const { num, title, description, ctaHref, ctaLabel } = Astro.props;
+---
+
+<div
+  class="border-border rounded-card flex w-full gap-6 border bg-white p-[clamp(20px,3vw,28px)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(20,22,28,0.06)]"
+>
+  <div class="w-14 flex-none">
+    <div class="text-faint mb-1 text-[11px] font-bold tracking-[0.08em]">STEP</div>
+    <div class="text-ink text-2xl font-extrabold">{num}</div>
+  </div>
+  <div class="min-w-0 flex-1">
+    <div class="mb-2 text-[17px] font-extrabold">{title}</div>
+    <p class="text-muted m-0 text-sm leading-[1.8]">{description}</p>
+    {
+      ctaHref && ctaLabel && (
+        <Button
+          href={ctaHref}
+          variant="dark"
+          class="mt-4 gap-[7px] rounded-lg px-[18px] py-[11px] text-[13px]"
+        >
+          <Icon slot="icon" name="mail" size={14} />
+          {ctaLabel}
+        </Button>
+      )
+    }
+  </div>
+</div>

@@ -1,0 +1,29 @@
+---
+type Variant = 'outline' | 'solid' | 'solid-footer' | 'dark' | 'muted';
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  class?: string;
+}
+
+const { href, variant = 'solid', class: className } = Astro.props;
+
+// Only structure + color live here. Padding/gap/radius/font-size/transition/press-scale
+// all vary by placement in the handoff (nav CTA vs hero CTA vs teaser link), so callers
+// supply those via `class` instead of this component guessing a one-size-fits-all value.
+const base = 'inline-flex items-center justify-center whitespace-nowrap font-bold no-underline';
+
+const variants: Record<Variant, string> = {
+  outline: 'border-[1.5px] border-accent text-accent hover:bg-accent-bg',
+  solid: 'bg-accent text-white hover:bg-accent-hover',
+  'solid-footer': 'bg-accent text-white hover:bg-accent-hover-footer',
+  dark: 'bg-ink text-white hover:bg-black',
+  muted: 'bg-muted text-white hover:opacity-90',
+};
+---
+
+<a href={href} class:list={[base, variants[variant], className]}>
+  <slot name="icon" />
+  <slot />
+</a>

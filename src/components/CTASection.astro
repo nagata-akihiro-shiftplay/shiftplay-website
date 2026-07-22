@@ -1,0 +1,33 @@
+---
+// Dark rounded closing CTA banner (README: Training's closing "生成AI法人研修についてのご相談は
+// こちら"). Only Training uses it today, but the shape (dark panel, heading+description left,
+// solid CTA right) is generic enough to reuse verbatim on future pages that end the same way.
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  heading: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { heading, description, ctaLabel, ctaHref } = Astro.props;
+---
+
+<div
+  class="bg-ink rounded-panel flex flex-wrap items-center justify-between gap-6 p-[clamp(28px,5vw,48px)]"
+>
+  <div class="text-white">
+    <div class="mb-2 text-[19px] font-extrabold">{heading}</div>
+    <div class="text-disabled text-sm">{description}</div>
+  </div>
+  <Button
+    href={ctaHref}
+    variant="solid-footer"
+    class="rounded-button gap-2 px-[26px] py-3.5 text-[15px]"
+  >
+    <Icon slot="icon" name="mail" size={16} />
+    {ctaLabel}
+  </Button>
+</div>

@@ -1,0 +1,45 @@
+---
+// Generic scroll-reveal wrapper (README: fade + translateY(28px)->0, IntersectionObserver
+// threshold 0.15, reveals once then unobserves). Reusable across any page section — not
+// specific to Home. Duration varies slightly by source page (Home sections: 0.7s, Service
+// cards: 0.6s), hence the `duration` prop instead of a hardcoded value.
+interface Props {
+  as?: string;
+  duration?: 600 | 700;
+  id?: string;
+  class?: string;
+}
+
+const { as = 'div', duration = 700, id, class: className }: Props = Astro.props;
+const Tag = as;
+const durationClass = duration === 600 ? 'duration-[600ms]' : 'duration-700';
+---
+
+<Tag
+  {...{ id }}
+  data-reveal
+  class:list={[
+    'translate-y-7 opacity-0 transition-[opacity,transform] ease-[ease]',
+    durationClass,
+    className,
+  ]}
+>
+  <slot />
+</Tag>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('translate-y-7', 'opacity-0');
+          entry.target.classList.add('translate-y-0', 'opacity-100');
+          observer.unobserve(entry.target);
+        }
+      }
+    },
+    { threshold: 0.15 },
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+</script>

@@ -1,0 +1,26 @@
+---
+// Styled text-ish <input> (text/email/tel/...). `required` renders as the explicit
+// `required="required"` value per project convention (a bare `required` attribute has
+// been observed not to survive certain templating layers).
+// `id` is set to `name` so FormField's <label for> can point at it (form field names are
+// unique per-page here, so this is safe without a separate id prop).
+interface Props {
+  type?: 'text' | 'email' | 'tel';
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  autocomplete?: string;
+}
+
+const { type = 'text', name, placeholder, required = false, autocomplete } = Astro.props;
+---
+
+<input
+  id={name}
+  type={type}
+  name={name}
+  placeholder={placeholder}
+  required={required ? 'required' : undefined}
+  autocomplete={autocomplete}
+  class="border-border text-ink w-full rounded-lg border bg-white px-3.5 py-[13px] text-sm"
+/>

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GhostHeading from '../components/GhostHeading.astro';
+import FormField from '../components/form/FormField.astro';
+import Input from '../components/form/Input.astro';
+import Textarea from '../components/form/Textarea.astro';
+import RadioGroup from '../components/form/RadioGroup.astro';
+import PrivacyAgreementCheckbox from '../components/form/PrivacyAgreementCheckbox.astro';
+import SubmitButton from '../components/form/SubmitButton.astro';
+import FormErrorBanner from '../components/form/FormErrorBanner.astro';
+import FormSuccessPanel from '../components/form/FormSuccessPanel.astro';
+
+const inquiryOptions = ['生成AI研修について', '生成AI導入支援について', 'その他'];
+---
+
+<BaseLayout
+  title="資料ダウンロード｜株式会社ShiftPlay"
+  description="株式会社ShiftPlayの事業資料をダウンロードいただけます。生成AI研修・導入支援サービスをご検討中の法人様はこちらからお申し込みください。"
+>
+  <section class="container-form section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(56px,7vw,88px)]">
+    <GhostHeading
+      watermark="DOWNLOAD"
+      label="資料ダウンロード"
+      watermarkClass="text-[clamp(44px,9vw,92px)]"
+      labelRowClass="mb-7"
+    />
+
+    <div data-form-root>
+      <div data-form-content>
+        <h1 class="m-0 mb-[22px] text-[19px] leading-[1.7] font-extrabold">
+          株式会社ShiftPlayの事業資料をダウンロード希望の方はこちら
+        </h1>
+        <p class="text-muted m-0 mb-[18px] text-sm leading-[1.9]">
+          本資料は、弊社の提供サービスをご検討中の法人様向けに作成したものです。<br
+          />同業他社様、情報収集目的でのダウンロードはご遠慮いただいております。<br
+          />内容の無断転載・共有も固くお断りしております。
+        </p>
+        <p class="text-muted m-0 mb-9 text-sm leading-[1.9]">
+          内容をご確認後、担当者よりご連絡させていただきます。<br
+          />また、お客様のご利用環境、もしくは迷惑メール対策等の設定により届かない場合がございます。<br
+          />返信がない場合は、迷惑メールフォルダ、設定などご確認の上、お手数ですが再度ご連絡いただけますと幸いです。
+        </p>
+
+        <form
+          data-formspree-form
+          action="https://formspree.io/f/xvzdrbjk"
+          method="POST"
+          class="flex flex-col gap-[26px]"
+        >
+          <FormErrorBanner />
+
+          <FormField label="会社名" for="company" required>
+            <Input
+              name="company"
+              placeholder="例）株式会社ShiftPlay"
+              autocomplete="organization"
+              required
+            />
+          </FormField>
+
+          <FormField label="お名前" for="name" required>
+            <Input name="name" placeholder="山田 太郎" autocomplete="name" required />
+          </FormField>
+
+          <FormField
+            label="メールアドレス"
+            for="email"
+            required
+            hint="【重要】gmail,yahoo等のフリーアドレスの記入はお控えください。"
+          >
+            <Input
+              type="email"
+              name="email"
+              placeholder="example@email.com"
+              autocomplete="email"
+              required
+            />
+          </FormField>
+
+          <FormField label="電話番号" for="phone" required>
+            <Input type="tel" name="phone" placeholder="09012341234" autocomplete="tel" required />
+          </FormField>
+
+          <FormField label="お問い合わせの種類" required labelRowClass="mb-3.5" fieldset>
+            <RadioGroup name="inquiryType" options={inquiryOptions} required />
+          </FormField>
+
+          <FormField label="お問い合わせ内容" for="message" required>
+            <Textarea name="message" placeholder="お問い合わせ内容をご入力ください" required />
+          </FormField>
+
+          <PrivacyAgreementCheckbox />
+
+          <SubmitButton />
+        </form>
+      </div>
+
+      <div data-form-success hidden>
+        <FormSuccessPanel
+          message="資料のご請求ありがとうございます。ご入力いただいたメールアドレスへ資料をお送りします。"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initFormspreeForm } from '../scripts/formspreeForm';
+  initFormspreeForm();
+</script>

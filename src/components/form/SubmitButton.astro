@@ -1,0 +1,19 @@
+---
+import Icon from '../Icon.astro';
+
+interface Props {
+  label?: string;
+}
+
+const { label = '送信する' } = Astro.props;
+---
+
+<button
+  type="submit"
+  disabled
+  data-submit-button
+  class="bg-accent rounded-button disabled:bg-disabled flex items-center justify-center gap-2 py-[15px] text-[15px] font-bold text-white transition-transform duration-100 active:scale-[0.98] disabled:cursor-not-allowed"
+>
+  <Icon name="arrow-right" />
+  {label}
+</button>

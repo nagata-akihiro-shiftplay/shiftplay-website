@@ -1,0 +1,22 @@
+---
+// Single row in the News list (README: date / category tag pill / title, full-width
+// clickable row with a bottom border and hover background).
+import type { NewsItem } from '../data/news';
+
+type Props = NewsItem;
+
+const { date, tag, title, href } = Astro.props;
+---
+
+<a
+  href={href}
+  class="text-ink border-border hover:bg-card flex flex-wrap items-center gap-[18px] border-b px-1 py-[22px] no-underline transition-colors duration-150 ease-[ease]"
+>
+  <div class="text-faint w-24 flex-none text-[13px] tabular-nums">{date}</div>
+  <div
+    class="text-accent bg-accent-bg flex-none rounded-md px-2.5 py-[5px] text-[11px] font-bold tracking-[0.06em]"
+  >
+    {tag}
+  </div>
+  <div class="min-w-[200px] flex-1 text-[15px]">{title}</div>
+</a>

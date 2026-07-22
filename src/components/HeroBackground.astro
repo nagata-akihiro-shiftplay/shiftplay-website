@@ -1,0 +1,90 @@
+---
+// Home hero's visual, replacing the still-unsupplied static photo (see
+// public/images/hero/README.md). Two blurred gradient blobs drift slowly via
+// `transform` only (GPU-compositable, no layout/paint work per frame) — no JS,
+// no canvas. Purely decorative, so it's hidden from the accessibility tree and
+// frozen under prefers-reduced-motion.
+---
+
+<div class="border-border rounded-panel relative h-full overflow-hidden border" aria-hidden="true">
+  <div class="hero-bg absolute inset-0"></div>
+  <div class="hero-grid absolute inset-0"></div>
+  <div class="hero-blob hero-blob-a absolute rounded-full"></div>
+  <div class="hero-blob hero-blob-b absolute rounded-full"></div>
+</div>
+
+<style>
+  .hero-bg {
+    background: linear-gradient(
+      135deg,
+      var(--color-card) 0%,
+      var(--color-page) 55%,
+      var(--color-accent-bg) 100%
+    );
+  }
+
+  .hero-grid {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--color-border);
+    opacity: 0.6;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  .hero-blob {
+    filter: blur(56px);
+    will-change: transform;
+  }
+
+  .hero-blob-a {
+    top: -12%;
+    left: -8%;
+    width: 62%;
+    height: 62%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-accent) 40%, transparent) 0%,
+      transparent 72%
+    );
+    animation: hero-float-a 22s ease-in-out infinite alternate;
+  }
+
+  .hero-blob-b {
+    right: -14%;
+    bottom: -14%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, #ffffff 85%, transparent) 0%,
+      transparent 72%
+    );
+    animation: hero-float-b 26s ease-in-out infinite alternate;
+  }
+
+  @keyframes hero-float-a {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(5%, 7%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes hero-float-b {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-6%, -5%, 0) scale(1.06);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-blob-a,
+    .hero-blob-b {
+      animation: none;
+    }
+  }
+</style>

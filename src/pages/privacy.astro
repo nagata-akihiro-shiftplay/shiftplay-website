@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GhostHeading from '../components/GhostHeading.astro';
+import PolicySection from '../components/PolicySection.astro';
+import PolicyList from '../components/PolicyList.astro';
+
+const articles = [
+  {
+    title: '第1条　個人情報の収集',
+    body: '当社は、お問い合わせフォームを通じて、以下の情報を収集いたします。',
+    list: ['お名前', 'メールアドレス', '電話番号', '会社名', 'お問い合わせ内容'],
+  },
+  {
+    title: '第2条　個人情報の利用目的',
+    body: '当社は、収集した個人情報を以下の目的でのみ利用します。',
+    list: ['お問い合わせへの回答や情報提供', 'ご相談内容に関するサポートやフォローアップ'],
+  },
+  {
+    title: '第3条　個人情報の第三者への提供',
+    body: '当社は、以下の場合を除き、お客様の個人情報を第三者に提供・開示しません。',
+    list: ['お客様の同意がある場合', '法令に基づき開示を求められる場合'],
+  },
+  {
+    title: '第4条　個人情報の安全管理',
+    body: '当社は、収集した個人情報の紛失、破壊、改ざん、および不正アクセスのリスクを防ぐための適切なセキュリティ対策を講じます。',
+  },
+  {
+    title: '第5条　アクセスログについて',
+    body: '当社のウェブサイトは、アクセス情報をログとして記録することがありますが、これには個人を特定する情報は含まれません。また、ログは統計的な情報収集のために利用され、個人情報として取り扱われることはありません。',
+  },
+  {
+    title: '第6条　プライバシーポリシーの変更',
+    body: '当社は、必要に応じて、本ポリシーの内容を改定することがあります。変更があった場合は当社ウェブサイト上で告知します。',
+  },
+  {
+    title: '第7条　お問い合わせ',
+    body: '個人情報の取扱いに関するお問い合わせは、以下の窓口までご連絡ください。',
+  },
+];
+---
+
+<BaseLayout
+  title="プライバシーポリシー｜株式会社ShiftPlay"
+  description="株式会社ShiftPlayのプライバシーポリシーです。個人情報の収集・利用目的・第三者提供・安全管理等について定めています。"
+>
+  <section class="container-privacy section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(56px,7vw,88px)]">
+    <GhostHeading
+      watermark="PRIVACY POLICY"
+      label="プライバシーポリシー"
+      watermarkClass="text-[clamp(36px,7vw,68px)]"
+      headingLevel="h1"
+    />
+
+    <p class="text-muted m-0 mb-8 text-sm leading-[1.9]">
+      株式会社ShiftPlay(以下「当社」という)は、お客様の個人情報を適切に取り扱うことの重要性を認識し、以下のプライバシーポリシーを定め、個人情報保護の体制を整えるものとします。
+    </p>
+
+    {
+      articles.map((article) => (
+        <PolicySection title={article.title} body={article.body}>
+          {article.list && <PolicyList items={article.list} />}
+        </PolicySection>
+      ))
+    }
+
+    <div class="bg-border mt-2 mb-8 h-px"></div>
+
+    <p class="text-faint m-0 text-[13px] leading-[1.9]">
+      代表取締役 永田 晃大　<a
+        href="mailto:info@shiftplay.jp"
+        class="text-accent no-underline hover:underline">info@shiftplay.jp</a
+      >
+    </p>
+    <p class="text-faint m-0 mt-2 text-[13px] leading-[1.9]">第1版　2026年7月21日　制定</p>
+  </section>
+</BaseLayout>
