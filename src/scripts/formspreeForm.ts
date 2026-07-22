@@ -26,6 +26,12 @@ export function initFormspreeForm(root: ParentNode = document): void {
   const checkbox = form.querySelector<HTMLInputElement>('input[type="checkbox"]');
   const submitButton = form.querySelector<HTMLButtonElement>('[data-submit-button]');
   const errorBanner = form.querySelector<HTMLElement>('[data-form-error]');
+  const subjectField = form.querySelector<HTMLInputElement>('input[name="_subject"]');
+  const nameField = form.querySelector<HTMLInputElement>('input[name="name"]');
+  const companyField = form.querySelector<HTMLInputElement>('input[name="company"]');
+  // Captured once before any submission appends the sender's name, so retries
+  // (e.g. after a failed attempt) don't keep stacking it onto itself.
+  const baseSubject = subjectField?.value ?? '';
 
   checkbox?.addEventListener('change', () => {
     if (submitButton) submitButton.disabled = !checkbox.checked;
@@ -36,6 +42,14 @@ export function initFormspreeForm(root: ParentNode = document): void {
     if (submitButton?.disabled) return;
 
     errorBanner?.setAttribute('hidden', '');
+
+    if (subjectField) {
+      const name = nameField?.value.trim();
+      const company = companyField?.value.trim();
+      const sender = name ? (company ? `${company} ${name}様` : `${name}様`) : '';
+      subjectField.value = sender ? `${baseSubject}：${sender}より` : baseSubject;
+    }
+
     try {
       const response = await fetch(form.action, {
         method: 'POST',
