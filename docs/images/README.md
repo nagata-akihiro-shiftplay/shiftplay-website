@@ -12,7 +12,7 @@
 | 会社情報の誘導画像       | Home(将来的にCompanyページでも使う可能性あり)    | [`teasers/`](teasers/README.md) |
 | 代表者(永田晃大氏)の写真 | Company(将来的にNews/Trainingでも使う可能性あり) | [`people/`](people/README.md)   |
 
-Home のヒーローは写真ではなく CSS アニメーション背景([`HeroBackground.astro`](../../src/components/HeroBackground.astro))を採用したため、現状 [`hero/`](hero/README.md) に配置が必要な画像は無い(将来他ページに写真ヒーローを追加する場合の置き場所として維持)。
+Home のヒーローは写真ではなくロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用したため、現状 [`hero/`](hero/README.md) に配置が必要な画像は無い(将来他ページに写真ヒーローを追加する場合の置き場所として維持)。
 
 これに加えて、ページ本文には表示されないがSNSシェア時に必要な OGP/Twitter Card 用画像を [`og/`](og/README.md) にまとめている。
 
@@ -28,4 +28,4 @@ Service / Training / News / Download / Contact / Privacy には現状デザイ�
 
 ## 現在のステータス(2026-07-22更新)
 
-`teasers/`(`service.jpg`/`company.jpg`)・`people/`(`ceo.jpg`)の3枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがCSSアニメーション背景([`HeroBackground.astro`](../../src/components/HeroBackground.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。
+`teasers/`(`service.jpg`/`company.jpg`)・`people/`(`ceo.jpg`)の3枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。

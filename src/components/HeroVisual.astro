@@ -1,0 +1,168 @@
+---
+// Home hero's visual: a minimal robot face (blinking eyes, glowing antenna,
+// gentle float) with two particles orbiting it — meant to read as "AI at
+// work" rather than abstract shapes. Pure CSS (transform/opacity/box-shadow),
+// no JS/canvas, so the hero section stays cheap on paint/LCP. Purely
+// decorative, so it's hidden from the accessibility tree and frozen under
+// prefers-reduced-motion.
+---
+
+<div class="flex h-full items-center justify-center" aria-hidden="true">
+  <div class="robot-wrap relative">
+    <div class="robot-orbit absolute inset-0">
+      <span class="robot-particle robot-particle-a"></span>
+      <span class="robot-particle robot-particle-b"></span>
+    </div>
+    <div class="robot-head relative">
+      <span class="robot-antenna absolute">
+        <span class="robot-antenna-tip absolute"></span>
+      </span>
+      <span class="robot-eye robot-eye-left absolute"></span>
+      <span class="robot-eye robot-eye-right absolute"></span>
+      <span class="robot-mouth absolute"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .robot-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 240px;
+  }
+
+  .robot-orbit {
+    animation: robot-orbit-spin 14s linear infinite;
+  }
+
+  .robot-particle {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .robot-particle-a {
+    top: 0;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    background: var(--color-accent);
+  }
+
+  .robot-particle-b {
+    right: 10px;
+    bottom: 17px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent-hover-footer);
+  }
+
+  .robot-head {
+    width: 130px;
+    height: 116px;
+    background: var(--color-accent);
+    border-radius: 30% 30% 26% 26% / 36% 36% 24% 24%;
+    animation: robot-bob 3.4s ease-in-out infinite;
+  }
+
+  .robot-eye {
+    top: 44px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--color-page);
+    animation: robot-blink 4s ease-in-out infinite;
+  }
+
+  .robot-eye-left {
+    left: 29px;
+  }
+
+  .robot-eye-right {
+    right: 29px;
+  }
+
+  .robot-mouth {
+    bottom: 26px;
+    left: 50%;
+    width: 38px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--color-page);
+    opacity: 0.75;
+    transform: translateX(-50%);
+  }
+
+  .robot-antenna {
+    top: -24px;
+    left: 50%;
+    width: 3px;
+    height: 24px;
+    background: var(--color-faint);
+    transform: translateX(-50%);
+  }
+
+  .robot-antenna-tip {
+    top: -9px;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: robot-glow 2.2s ease-in-out infinite;
+    transform: translateX(-50%);
+  }
+
+  @keyframes robot-orbit-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes robot-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes robot-blink {
+    0%,
+    88%,
+    100% {
+      transform: scaleY(1);
+    }
+    92% {
+      transform: scaleY(0.1);
+    }
+  }
+
+  @keyframes robot-glow {
+    0%,
+    100% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 rgba(26, 70, 229, 0);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(26, 70, 229, 0.7);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .robot-orbit,
+    .robot-head,
+    .robot-eye,
+    .robot-antenna-tip {
+      animation: none;
+    }
+  }
+</style>

@@ -6,7 +6,7 @@
 
 ## 現在のステータス
 
-**Homeのヒーローは静止画を使わない方針に変更済み。** Vercel/Linear/Stripeのような上品なアニメーション背景([`src/components/HeroBackground.astro`](../../../src/components/HeroBackground.astro), CSSのみで実装)を採用しており、写真の納品を待たない設計にした。そのため現状このフォルダに配置が必要な画像は無い。
+**Homeのヒーローは静止画を使わない方針に変更済み。** ミニマルなロボットの顔(瞬き・浮遊・アンテナ発光)と周回する粒子2つで構成するビジュアル([`src/components/HeroVisual.astro`](../../../src/components/HeroVisual.astro), CSSのみで実装、枠なし・背景はページと同色)を採用しており、写真の納品を待たない設計にした。そのため現状このフォルダに配置が必要な画像は無い。
 
 ## 用途(将来Service/Training/Companyなど他ページにヒーロー写真を追加する場合)
 
@@ -20,12 +20,12 @@ JPG(高解像度写真)。透過が必要な場合のみPNG。
 
 ## 使用ページ
 
-- 現状なし(HomeはCSSアニメーション背景に変更済み)
+- 現状なし(Homeはロボットの顔+周回粒子のビジュアルに変更済み)
 
 ## 使用コンポーネント
 
-- 現状なし。`src/pages/index.astro`の該当箇所は`<HeroBackground />`に置き換わっている。
+- 現状なし。`src/pages/index.astro`の該当箇所は`<HeroVisual />`に置き換わっている。
 
 ## 備考
 
-将来Service/Training/Companyなど、いずれかのページ上部に写真によるキービジュアルを追加したくなった場合は、ページ名を接頭辞にしたファイル名(例: `hero-training.jpg`)でこのフォルダに追加する。Homeのヒーローを再び写真に戻したい場合も同様にここへ配置し、`HeroBackground.astro`を`astro:assets`の`<Image />`に差し替える。
+将来Service/Training/Companyなど、いずれかのページ上部に写真によるキービジュアルを追加したくなった場合は、ページ名を接頭辞にしたファイル名(例: `hero-training.jpg`)でこのフォルダに追加する。Homeのヒーローを再び写真に戻したい場合も同様にここへ配置し、`HeroVisual.astro`を`astro:assets`の`<Image />`に差し替える。
