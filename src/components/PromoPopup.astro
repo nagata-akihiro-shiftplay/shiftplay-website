@@ -1,0 +1,51 @@
+---
+// Sticky bottom-right CTA popup (site-wide, shown via BaseLayout). Dismissal
+// is remembered in localStorage so closing it on one page keeps it closed on
+// the next page load too (Astro is a traditional MPA — without this it would
+// reappear on every navigation).
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<div id="promo-popup" data-promo-popup class="fixed right-5 bottom-5 z-40 hidden max-w-[260px]">
+  <div class="relative">
+    <a
+      href={href}
+      class="bg-ink flex items-center gap-3 rounded-xl py-3 pr-5 pl-3 text-white no-underline shadow-[0_12px_30px_rgba(20,22,28,0.25)]"
+    >
+      <span class="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-white/15">
+        <Icon name="arrow-right" size={16} />
+      </span>
+      <span class="text-sm leading-snug font-bold">{label}</span>
+    </a>
+    <button
+      type="button"
+      data-promo-popup-close
+      aria-label="ポップアップを閉じる"
+      class="border-border text-ink absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border bg-white shadow"
+    >
+      <Icon name="close" size={12} />
+    </button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'shiftplay-promo-popup-dismissed';
+  const popup = document.querySelector<HTMLElement>('[data-promo-popup]');
+  const closeButton = popup?.querySelector<HTMLButtonElement>('[data-promo-popup-close]');
+
+  if (popup && !localStorage.getItem(STORAGE_KEY)) {
+    popup.classList.remove('hidden');
+  }
+
+  closeButton?.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, '1');
+    popup?.classList.add('hidden');
+  });
+</script>

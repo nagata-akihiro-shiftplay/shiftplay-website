@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import PromoPopup from '../components/PromoPopup.astro';
 
 interface Props {
   title: string;
@@ -15,6 +16,9 @@ const { title, description, ogImage = '/logo.png', noindex = false, activeNav } 
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = ogImage ? new URL(ogImage, Astro.site) : undefined;
+
+// Don't nag someone who's already on the page the popup links to.
+const showPromoPopup = Astro.url.pathname !== '/service/training';
 
 // Lighthouse (render-blocking-insight, 2026-07-22): the Google Fonts stylesheet
 // was blocking first paint by ~1s. Loaded async below via the standard
@@ -84,6 +88,7 @@ const ogImageURL = ogImage ? new URL(ogImage, Astro.site) : undefined;
       </main>
       <SiteFooter />
     </div>
+    {showPromoPopup && <PromoPopup href="/service/training" label="生成AI法人研修はこちらから" />}
     <script>
       // Site-wide page-load fade-in (README: "every page's root wrapper starts at
       // opacity:0, translateY(10px) ... one animation frame after mount").
