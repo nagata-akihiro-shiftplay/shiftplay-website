@@ -28,4 +28,4 @@ Service / Training / News / Download / Contact / Privacy には現状デザイ�
 
 ## 現在のステータス(2026-07-22更新)
 
-`teasers/`(`service.jpg`/`company.jpg`)・`people/`(`ceo.jpg`)の3枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。
+`teasers/`(`service.jpg`)・`people/`(`ceo.jpg`)の2枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。Homeの「会社情報」誘導セクションは2026-08-19、代表挨拶との一貫性のため`teasers/company.jpg`から`people/ceo.jpg`に差し替え、`company.jpg`は削除した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。

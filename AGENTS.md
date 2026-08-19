@@ -37,7 +37,7 @@ app/shiftplay/
 │   ├── logo.png                    # 実ロゴ(2026-07-22納品、透過PNG。Logo.astroが参照する唯一の場所)
 │   └── images/                     # 実写真。ページ単位ではなく役割・再利用性単位のフォルダ構成
 │       ├── hero/                   # ページ最上部のキービジュアル用(Homeのヒーローは採用せずCSSアニメーション背景に変更したため、現状空)
-│       ├── teasers/                # Homeの事業内容/会社情報誘導セクションの添え画像(service.jpg/company.jpg 配置済み)
+│       ├── teasers/                # Homeの事業内容誘導セクションの添え画像(service.jpg 配置済み。会社情報誘導セクションは2026-08-19にpeople/ceo.jpgへ差し替え)
 │       ├── people/                 # 代表者・スタッフのポートレート写真(ceo.jpg 配置済み)
 │       └── og/                     # OGP/Twitter Card用のシェア画像(og-image.png 配置済み、全ページ共通デフォルト)
 │           # 各フォルダの用途/推奨サイズ/推奨形式/使用ページ/使用コンポーネントは

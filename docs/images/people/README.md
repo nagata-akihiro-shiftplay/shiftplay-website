@@ -14,7 +14,8 @@ JPG。
 
 ## 使用ページ
 
-- Company(`/company`) のみ(現状)
+- Company(`/company`) の代表挨拶セクション
+- Home(`/`) の「会社情報」誘導セクション(2026-08-19、代表挨拶との一貫性のため`teasers/company.jpg`から差し替え)
 
 ## 配置済みファイル(2026-07-22納品、同日Lighthouse対応でリサイズ・JPG化)
 
@@ -22,7 +23,8 @@ JPG。
 
 ## 使用コンポーネント
 
-- [`src/pages/company.astro`](../../../src/pages/company.astro) 内の `astro:assets` の `<Image src="/images/people/ceo.jpg" alt="代表取締役 永田晃大" width={675} height={900} loading="lazy" class="rounded-block h-[340px] w-full object-cover" />`
+- [`src/pages/company.astro`](../../../src/pages/company.astro) 内の `astro:assets` の `<Image src="/images/people/ceo.jpg" alt="代表取締役 永田晃大" width={675} height={900} loading="lazy" class="rounded-block h-[320px] w-full object-cover min-[701px]:h-auto min-[701px]:min-h-[360px] min-[701px]:flex-1" />`
+- [`src/pages/index.astro`](../../../src/pages/index.astro) の`eyebrow="ABOUT"`側の`HomeTeaser`に`imageSrc="/images/people/ceo.jpg"`として渡している(`src/components/HomeTeaser.astro`内は`object-cover`で表示box形状にトリミングされる)。
 
 ## 備考
 
