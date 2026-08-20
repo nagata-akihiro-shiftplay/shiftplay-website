@@ -19,7 +19,6 @@
   - 会社情報(設立年月・所在地・資本金)の最終確認
   - フォーム送信先(Formspree継続 or 自社バックエンド)
   - フッターへの「お知らせ」リンク有無(README本文とデザインコードに齟齬あり、実装前に確認)
-  - `astro.config.mjs` の `site: 'https://shiftplay.jp'` は仮ドメイン。本番ドメイン確定後に更新すること。
 - **実装状況**: README Site Mapの全8ページ(Home/Service/Training/Company/News/Download/Contact/Privacy)実装済み。共通コンポーネントの基盤はCompanyまでで揃ったため、以降は大きな設計変更があった場合のみこのファイルを更新する。
 
 ## 2. ディレクトリ構成
