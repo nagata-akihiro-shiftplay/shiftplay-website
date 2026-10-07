@@ -33,17 +33,19 @@ const navCtaBase =
       </Button>
     </nav>
   </div>
+  {
+    /* All three items share the same py-2.5 line box so they sit on one baseline; on phones
+      the text drops to 12px and the gaps tighten so the row still fits on one line at 375px. */
+  }
   <div
-    class="container-full section-px border-border flex flex-wrap justify-between gap-3 border-t pt-5 pb-8"
+    class="container-full section-px border-border flex flex-wrap items-center justify-between gap-x-3 border-t pt-5 pb-8 text-xs min-[701px]:text-[13px]"
   >
-    <div class="flex flex-wrap gap-[22px]">
-      <a href="/privacy" class="text-faint hover:text-ink py-2.5 text-[13px] no-underline"
+    <div class="flex flex-wrap gap-x-4 min-[701px]:gap-x-[22px]">
+      <a href="/privacy" class="text-faint hover:text-ink py-2.5 no-underline"
         >プライバシーポリシー</a
       >
-      <a href="/contact" class="text-faint hover:text-ink py-2.5 text-[13px] no-underline"
-        >お問い合わせ</a
-      >
+      <a href="/contact" class="text-faint hover:text-ink py-2.5 no-underline">お問い合わせ</a>
     </div>
-    <div class="text-faint text-[13px]">© 2026 ShiftPlay inc</div>
+    <div class="text-faint py-2.5">© 2026 ShiftPlay inc</div>
   </div>
 </footer>
