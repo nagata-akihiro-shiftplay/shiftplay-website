@@ -1,0 +1,23 @@
+---
+// Home section heading: gray English eyebrow + Japanese h2 + optional lead line. The
+// eyebrow/heading styles are the ones the previous Home teaser sections used, kept so the
+// restructured Home still reads as the same site.
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+}
+
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<div class="flex flex-col gap-3">
+  {
+    /* README spec value was #9a9ca2 (~2.5:1 on the page background, a WCAG AA
+    fail even at this large/bold size). Darkened to ~3.1:1 (Lighthouse a11y
+    audit, 2026-07-22) — same visual weight, just legible. */
+  }
+  <p class="m-0 text-2xl font-bold tracking-[0.1em] text-[#8a8c91]">{eyebrow}</p>
+  <h2 class="m-0 text-[clamp(26px,3.4vw,38px)] leading-[1.3] font-extrabold">{title}</h2>
+  {lead && <p class="m-0 text-[clamp(17px,2vw,21px)] font-bold">{lead}</p>}
+</div>

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GhostHeading from '../../components/GhostHeading.astro';
+import AnchorNav from '../../components/AnchorNav.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import TagChip from '../../components/TagChip.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import FlowSteps from '../../components/FlowSteps.astro';
+import CTASection from '../../components/CTASection.astro';
+import RevealOnScroll from '../../components/RevealOnScroll.astro';
+import Divider from '../../components/Divider.astro';
+
+const sectionClass = 'container-full section-px scroll-mt-28 py-[clamp(28px,5vw,48px)]';
+
+const quickNav = [
+  { num: '01', label: 'こんなお悩み', href: '#problem' },
+  { num: '02', label: 'サービス概要', href: '#overview' },
+  { num: '03', label: '料金', href: '#price' },
+  { num: '04', label: '相談から定着までの流れ', href: '#flow' },
+];
+
+const problems = [
+  'AIがこれから大事になるのは分かるけれど、何に使えばいいか分からない',
+  'どんなAIがあるのか、どれを選べばいいのか分からない',
+  '何から始めればいいのか分からない',
+];
+
+const menu = [
+  '業務の棚卸し',
+  'AI導入相談',
+  '業務効率化',
+  '文章作成支援',
+  '業務フロー整理',
+  'AIエージェント活用の相談',
+];
+
+const prices = [
+  { label: '初回相談', note: 'お悩みのヒアリング・進め方のご相談', amount: '無料' },
+  {
+    label: 'AI活用支援',
+    note: '業務の棚卸し・ツール選定・導入・定着サポート',
+    amount: 'お見積り',
+  },
+];
+
+const priceNotes = ['業務の棚卸しの結果をもとに、支援の範囲と費用をご提案します。'];
+
+const flow = [
+  {
+    num: '01',
+    title: 'ご相談（初回無料）',
+    description:
+      'お問い合わせフォームかInstagramのDMからご連絡ください。「何に使えばいいか分からない」という段階でも大丈夫です。',
+  },
+  {
+    num: '02',
+    title: '業務の棚卸し',
+    description:
+      '日々の業務の流れや時間がかかっている作業を一緒に洗い出し、AIに任せられる仕事を整理します。',
+  },
+  {
+    num: '03',
+    title: '活用プランのご提案',
+    description:
+      '整理した業務をもとに、合ったAIツールと使い方、進め方をご提案します。費用もこの段階でお見積りします。',
+  },
+  {
+    num: '04',
+    title: '導入・定着サポート',
+    description:
+      '導入後も、使い方のご相談や改善まで伴走し、日々の業務にAIが定着するようサポートします。',
+  },
+];
+---
+
+<BaseLayout
+  title="その他AI支援｜株式会社ShiftPlay"
+  description="「AIを何に使えばいいか分からない」段階から、業務の棚卸し・AIツールの選定・導入・定着までを伴走します。初回相談無料。"
+  activeNav="service"
+>
+  <section class="container-full section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(24px,4vw,40px)]">
+    <GhostHeading
+      watermark="AI SUPPORT"
+      label="その他AI支援"
+      watermarkClass="text-[clamp(40px,8vw,76px)]"
+      labelRowClass="mb-5"
+      headingLevel="h1"
+    />
+    <p class="m-0 mb-8 text-[clamp(20px,2.6vw,26px)] leading-[1.5] font-extrabold">
+      AIを使って、日々の仕事をもっと軽く。
+    </p>
+    <AnchorNav items={quickNav} />
+  </section>
+
+  <section id="problem" class={sectionClass}>
+    <SectionTitle eyebrow="PROBLEM" subLabel="01 — こんなお悩みはありませんか" />
+    <div class="bg-card rounded-block flex max-w-[46em] flex-col gap-4 p-[clamp(20px,3vw,32px)]">
+      {
+        problems.map((item) => (
+          <div class="text-ink flex gap-2.5 text-sm leading-[1.8]">
+            <span class="bg-accent mt-[9px] h-1.5 w-1.5 flex-none rounded-full" />
+            <span>{item}</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll as="section" id="overview" class={sectionClass}>
+    <SectionTitle eyebrow="OVERVIEW" subLabel="02 — サービス概要" />
+    <p class="m-0 mb-4 text-[clamp(18px,2.2vw,22px)] leading-[1.5] font-extrabold">
+      まずは、業務の棚卸しから。
+    </p>
+    <p class="text-muted m-0 mb-6 max-w-[46em] text-[15px] leading-[1.9]">
+      AIは、導入すること自体が目的ではありません。大切なのは、どの仕事にAIを使うと効果が出るのかを見極めること。ShiftPlayでは、日々の業務を一緒に洗い出し、AIに任せられる仕事と人が担うべき仕事を整理するところからサポートします。そのうえで、合ったAIツールの選定から導入、日々の業務に定着するまで伴走します。
+    </p>
+    <div class="flex flex-wrap gap-2.5">
+      {menu.map((item) => <TagChip class="rounded-lg px-4 py-[9px] text-[13px]">{item}</TagChip>)}
+    </div>
+  </RevealOnScroll>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll as="section" id="price" class={sectionClass}>
+    <SectionTitle eyebrow="PRICE" subLabel="03 — 料金" />
+    <PriceTable rows={prices} notes={priceNotes} />
+  </RevealOnScroll>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll
+    as="section"
+    id="flow"
+    class="container-full section-px scroll-mt-28 pt-[clamp(28px,5vw,48px)] pb-[clamp(56px,7vw,80px)]"
+  >
+    <SectionTitle eyebrow="FLOW" subLabel="04 — 相談から定着までの流れ" />
+    <FlowSteps steps={flow} />
+  </RevealOnScroll>
+
+  <section class="container-full section-px pb-[clamp(56px,7vw,80px)]">
+    <CTASection
+      heading="AI活用についてのご相談はこちら"
+      description="初回のご相談は無料です。何から始めればいいか分からない段階でも、お気軽にお問い合わせください。"
+      ctaLabel="お問い合わせ"
+      ctaHref="/contact"
+    />
+  </section>
+</BaseLayout>

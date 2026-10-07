@@ -6,55 +6,7 @@ import { mainNavItems } from '../data/nav';
 
 const navCtaBase =
   'gap-[7px] rounded-lg py-2.5 text-sm transition-[background-color,transform] duration-150 active:scale-[0.96]';
-
-const promoCards = [
-  {
-    href: '/download',
-    iconBg: 'bg-icon-dl',
-    icon: 'download' as const,
-    eyebrow: 'DOWNLOAD',
-    title: '資料ダウンロード',
-    description:
-      '弊社の生成AIサービスについて詳細をご覧になりたい方は、こちらよりサービス資料をダウンロードください。',
-  },
-  {
-    href: '/contact',
-    iconBg: 'bg-icon-contact',
-    icon: 'mail' as const,
-    eyebrow: 'CONTACT',
-    title: 'お問い合わせ',
-    description:
-      'サービスや講演・取材・寄稿などに関するお問い合わせなどはこちらよりご気軽にご連絡ください。',
-  },
-];
 ---
-
-<div class="container-full section-px flex flex-wrap gap-5 pb-[clamp(28px,5vw,56px)]">
-  {
-    promoCards.map((card) => (
-      <a
-        href={card.href}
-        class="rounded-card border-border text-ink flex min-w-[280px] flex-[1_1_380px] items-start gap-[18px] border bg-white p-[clamp(20px,3vw,28px)] no-underline transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-[0_12px_30px_rgba(20,22,28,0.08)] active:scale-[0.98]"
-      >
-        <span
-          class={`flex h-[52px] w-[52px] flex-none items-center justify-center rounded-full ${card.iconBg}`}
-        >
-          <Icon name={card.icon} size={22} class="text-accent" />
-        </span>
-        <span class="flex-1">
-          <span class="text-accent mb-1 block text-xs font-bold tracking-[0.08em]">
-            {card.eyebrow}
-          </span>
-          <span class="text-ink mb-2 flex items-center gap-2 text-lg font-extrabold">
-            {card.title}
-            <Icon name="chevron-right" />
-          </span>
-          <span class="text-muted block text-sm leading-[1.8]">{card.description}</span>
-        </span>
-      </a>
-    ))
-  }
-</div>
 
 <footer class="border-border bg-page text-ink border-t">
   <div
@@ -76,14 +28,9 @@ const promoCards = [
           ))
         }
       </div>
-      <div class="flex flex-nowrap items-center gap-3">
-        <Button href="/download" variant="outline" class={`${navCtaBase} px-[18px]`}>
-          <Icon slot="icon" name="download" />資料ダウンロード
-        </Button>
-        <Button href="/contact" variant="solid-footer" class={`${navCtaBase} px-5`}>
-          <Icon slot="icon" name="mail" />お問い合わせ
-        </Button>
-      </div>
+      <Button href="/contact" variant="solid-footer" class={`${navCtaBase} px-5`}>
+        <Icon slot="icon" name="mail" />お問い合わせ
+      </Button>
     </nav>
   </div>
   <div
@@ -97,6 +44,6 @@ const promoCards = [
         >お問い合わせ</a
       >
     </div>
-    <div class="text-faint text-[13px]">© ShiftPlay Inc. All Rights Reserved.</div>
+    <div class="text-faint text-[13px]">© 2026 ShiftPlay inc</div>
   </div>
 </footer>

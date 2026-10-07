@@ -1,0 +1,43 @@
+---
+// Numbered step cards shared by the /services/* pages: 4 across with arrows between on
+// desktop, 2 across on tablet, stacked on mobile. Each card lifts on hover; the lift sits
+// on the inner <div> so the arrows between cards stay put.
+import Icon from './Icon.astro';
+
+interface Step {
+  num: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol
+  class="m-0 grid list-none gap-4 p-0 min-[701px]:grid-cols-2 min-[861px]:grid-cols-4 min-[861px]:gap-8"
+>
+  {
+    steps.map((step, i) => (
+      <li class="relative">
+        {/* Tailwind v4's translate-* sets the `translate` property, not `transform`,
+            so the transition has to name it or the lift snaps instead of easing. */}
+        <div class="border-border rounded-card h-full border bg-white p-[clamp(20px,2.4vw,28px)] transition-[translate,box-shadow] duration-200 ease-out hover:shadow-[0_12px_30px_rgba(20,22,28,0.08)] motion-safe:hover:-translate-y-1">
+          <div class="text-accent text-2xl font-extrabold">{step.num}</div>
+          <h3 class="m-0 mt-3 text-base font-extrabold">{step.title}</h3>
+          <p class="text-muted m-0 mt-2 text-[13px] leading-[1.9]">{step.description}</p>
+        </div>
+        {i < steps.length - 1 && (
+          <Icon
+            name="arrow-right"
+            size={18}
+            class="text-faint absolute top-1/2 -right-[25px] hidden -translate-y-1/2 min-[861px]:block"
+          />
+        )}
+      </li>
+    ))
+  }
+</ol>

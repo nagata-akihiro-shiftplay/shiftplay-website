@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GhostHeading from '../../components/GhostHeading.astro';
+import AnchorNav from '../../components/AnchorNav.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import TagChip from '../../components/TagChip.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import FlowSteps from '../../components/FlowSteps.astro';
+import CTASection from '../../components/CTASection.astro';
+import RevealOnScroll from '../../components/RevealOnScroll.astro';
+import Divider from '../../components/Divider.astro';
+
+// Same width/edge as Home, so this page reads as Home's "サービス" section opened up, and
+// the 4-step flow has room to sit in one row on desktop.
+const sectionClass = 'container-full section-px scroll-mt-28 py-[clamp(28px,5vw,48px)]';
+
+const quickNav = [
+  { num: '01', label: 'サービス概要', href: '#overview' },
+  { num: '02', label: '料金', href: '#price' },
+  { num: '03', label: '制作の流れ', href: '#flow' },
+];
+
+const features = [
+  'AI活用で高速制作',
+  'スマホ対応',
+  'SEO・OGP対応',
+  'ドメイン設定まで対応',
+  '公開後の運用サポート',
+];
+
+const prices = [
+  { label: 'ホームページ制作', note: '初期費用・一式', amount: '100,000', unit: '円〜' },
+  { label: '月額', note: 'サーバー代・ドメイン代など', amount: '1,000', unit: '円〜' },
+];
+
+const priceNotes = [
+  '予約フォームなどの機能追加は、内容に応じて別途お見積りいたします。',
+  '表示価格はすべて税別です。ページ数や掲載内容の量によって変わります。',
+];
+
+const flow = [
+  {
+    num: '01',
+    title: 'ヒアリング',
+    description:
+      'お問い合わせフォームかInstagramのDMからご連絡ください。事業の内容やご要望をお伺いします。何を載せればいいか決まっていなくても大丈夫です。',
+  },
+  {
+    num: '02',
+    title: 'AI制作',
+    description:
+      'お伺いした内容をもとに、AIエージェントと協働して構成・原稿・デザイン・実装を進めます。工程を効率化し、短い期間でかたちにします。',
+  },
+  {
+    num: '03',
+    title: '確認・修正',
+    description:
+      '完成前の画面をURLでお送りします。スマホやパソコンで実際に見ていただきながら、気になる点を調整します。',
+  },
+  {
+    num: '04',
+    title: '公開・運用',
+    description:
+      'ドメインの設定から公開作業まで対応します。公開後の更新やご相談も、同じ担当者が引き続きサポートします。',
+  },
+];
+---
+
+<BaseLayout
+  title="ホームページ制作｜株式会社ShiftPlay"
+  description="AIエージェントを活用したホームページ制作サービスです。構成・原稿整理からデザイン・実装・公開まで一貫して対応します。初期費用100,000円〜(税別)。"
+  activeNav="service"
+>
+  <section class="container-full section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(24px,4vw,40px)]">
+    <GhostHeading
+      watermark="WEBSITE"
+      label="ホームページ制作"
+      watermarkClass="text-[clamp(40px,8vw,76px)]"
+      labelRowClass="mb-5"
+      headingLevel="h1"
+    />
+    <p class="m-0 mb-8 text-[clamp(20px,2.6vw,26px)] leading-[1.5] font-extrabold">
+      伝えたいことを整理し、伝わるWebサイトへ。
+    </p>
+    <AnchorNav items={quickNav} />
+  </section>
+
+  <section id="overview" class={sectionClass}>
+    <SectionTitle eyebrow="OVERVIEW" subLabel="01 — サービス概要" />
+    <p class="text-muted m-0 mb-6 max-w-[46em] text-[15px] leading-[1.9]">
+      会社やサービスの魅力がきちんと伝わる、見やすく使いやすいWebサイトを制作します。AIエージェントとの協働を前提に、構成・原稿整理からデザイン・実装・公開までを一貫して担当。制作期間の短縮とコストの最適化につなげます。これから初めてホームページを持ちたい方も、今のサイトを作り直したい方も、まずはお気軽にご相談ください。
+    </p>
+    <div class="flex flex-wrap gap-2.5">
+      {
+        features.map((item) => (
+          <TagChip class="rounded-lg px-4 py-[9px] text-[13px]">{item}</TagChip>
+        ))
+      }
+    </div>
+  </section>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll as="section" id="price" class={sectionClass}>
+    <SectionTitle eyebrow="PRICE" subLabel="02 — 料金" />
+    <PriceTable rows={prices} notes={priceNotes} />
+  </RevealOnScroll>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll
+    as="section"
+    id="flow"
+    class="container-full section-px scroll-mt-28 pt-[clamp(28px,5vw,48px)] pb-[clamp(56px,7vw,80px)]"
+  >
+    <SectionTitle eyebrow="FLOW" subLabel="03 — 制作の流れ" />
+    <FlowSteps steps={flow} />
+  </RevealOnScroll>
+
+  <section class="container-full section-px pb-[clamp(56px,7vw,80px)]">
+    <CTASection
+      heading="ホームページ制作についてのご相談はこちら"
+      description="まずはお気軽にお問い合わせください。担当者より折り返しご連絡いたします。"
+      ctaLabel="お問い合わせ"
+      ctaHref="/contact"
+    />
+  </section>
+</BaseLayout>

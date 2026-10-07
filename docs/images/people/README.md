@@ -6,7 +6,7 @@
 
 ## 推奨サイズ
 
-Companyページの代表挨拶セクションでは、画像枠は横幅最大280px・固定高さ340px(縦長、目安3:4〜4:5)。書き出しは縦1000px以上を推奨(Retina対応)。
+Homeの会社概要では丸型120×120pxで表示する。正方形(1:1)で、顔が中央付近に来るように切り抜いて書き出す(丸型なので四隅は見えない)。書き出しは600×600px程度で十分(Retinaの2倍表示でも240px)。
 
 ## 推奨形式
 
@@ -14,17 +14,17 @@ JPG。
 
 ## 使用ページ
 
-- Company(`/company`) の代表挨拶セクション
-- Home(`/`) の「会社情報」誘導セクション(2026-08-19、代表挨拶との一貫性のため`teasers/company.jpg`から差し替え)
+- Home(`/`) の会社概要セクション(2026-10-07のHome再構成以降。それ以前は「会社情報」誘導セクションで大きく表示していた)
+- アーカイブ中のCompanyページ(`src/pages/_company.astro`)の代表挨拶セクション
 
-## 配置済みファイル(2026-07-22納品、同日Lighthouse対応でリサイズ・JPG化)
+## 配置済みファイル
 
-- `ceo.jpg`(675×900, JPEG q85, 約89KB) — 代表取締役 永田晃大の写真。納品時は`ceo.png`(1086×1448, PNG, 約1.6MB)だったが、LighthouseのImprove image delivery指摘を受けて表示サイズに合わせてリサイズしJPG化した。
+- `ceo.jpg`(600×600, JPEG q85, 約50KB) — 代表取締役 永田晃大の写真。2026-10-07にユーザー提供の新しい写真(1207×679の横長、路地でスマホを構えている写真)に差し替え。丸型で顔とスマホを構える手が両方収まるよう、元画像の(250,95)-(780,625)を正方形に切り抜いて600×600に縮小した。旧写真(675×900の縦長ポートレート、2026-07-22納品)はgit履歴に残っている。
 
 ## 使用コンポーネント
 
-- [`src/pages/company.astro`](../../../src/pages/company.astro) 内の `astro:assets` の `<Image src="/images/people/ceo.jpg" alt="代表取締役 永田晃大" width={675} height={900} loading="lazy" class="rounded-block h-[320px] w-full object-cover min-[701px]:h-auto min-[701px]:min-h-[360px] min-[701px]:flex-1" />`
-- [`src/pages/index.astro`](../../../src/pages/index.astro) の`eyebrow="ABOUT"`側の`HomeTeaser`に`imageSrc="/images/people/ceo.jpg"`として渡している(`src/components/HomeTeaser.astro`内は`object-cover`で表示box形状にトリミングされる)。
+- [`src/pages/index.astro`](../../../src/pages/index.astro) の会社概要セクション内の `astro:assets` の `<Image src="/images/people/ceo.jpg" alt="代表取締役 永田晃大" width={600} height={600} loading="lazy" class="h-[120px] w-[120px] rounded-full object-cover" />`
+- アーカイブ中の [`src/pages/_company.astro`](../../../src/pages/_company.astro) でも同じファイルを参照している。旧写真は縦長の大きな枠用だったため、Companyページを復活させる場合は正方形の新写真が枠に合うか確認すること。
 
 ## 備考
 

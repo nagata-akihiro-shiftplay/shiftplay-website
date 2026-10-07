@@ -4,13 +4,12 @@
 
 ## 方針
 
-現在実装済みの8ページ(Home / Service / Training / Company / News / Download / Contact / Privacy)のうち、実際に画像枠(`ImagePlaceholder`)が存在するのは以下の4箇所のみ:
+2026-10-07の再構成後の公開ページ(Home / ホームページ制作 / その他AI支援 / Contact / Privacy)で写真を使っているのは以下の1箇所のみ:
 
-| 画像                     | 現在の使用ページ                                 | フォルダ                        |
-| ------------------------ | ------------------------------------------------ | ------------------------------- |
-| 事業内容の誘導画像       | Home(将来的にServiceページでも使う可能性あり)    | [`teasers/`](teasers/README.md) |
-| 会社情報の誘導画像       | Home(将来的にCompanyページでも使う可能性あり)    | [`teasers/`](teasers/README.md) |
-| 代表者(永田晃大氏)の写真 | Company(将来的にNews/Trainingでも使う可能性あり) | [`people/`](people/README.md)   |
+| 画像                     | 現在の使用ページ                                    | フォルダ                        |
+| ------------------------ | --------------------------------------------------- | ------------------------------- |
+| 代表者(永田晃大氏)の写真 | Homeの会社概要(アーカイブ中のCompanyページでも参照) | [`people/`](people/README.md)   |
+| 事業内容の誘導画像       | 現在未使用(旧Homeのティザーで使用)                  | [`teasers/`](teasers/README.md) |
 
 Home のヒーローは写真ではなくロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用したため、現状 [`hero/`](hero/README.md) に配置が必要な画像は無い(将来他ページに写真ヒーローを追加する場合の置き場所として維持)。
 
@@ -28,4 +27,4 @@ Service / Training / News / Download / Contact / Privacy には現状デザイ�
 
 ## 現在のステータス(2026-07-22更新)
 
-`teasers/`(`service.jpg`)・`people/`(`ceo.jpg`)の2枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。Homeの「会社情報」誘導セクションは2026-08-19、代表挨拶との一貫性のため`teasers/company.jpg`から`people/ceo.jpg`に差し替え、`company.jpg`は削除した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。
+`teasers/`(`service.jpg`)・`people/`(`ceo.jpg`)の2枚を配置し、`ImagePlaceholder`から実画像への差し替えが完了した。Homeの「会社情報」誘導セクションは2026-08-19、代表挨拶との一貫性のため`teasers/company.jpg`から`people/ceo.jpg`に差し替え、`company.jpg`は削除した。納品時のPNGはLighthouse対応で表示サイズにリサイズ・JPG化済み(詳細は各フォルダのREADMEを参照)。`hero/`はHomeのヒーローがロボットの顔+周回粒子のビジュアル([`HeroVisual.astro`](../../src/components/HeroVisual.astro))を採用しているため引き続き配置不要。`og/`は実ロゴ納品に伴い仮バナー(`og-image.png`)を削除し、現状空(全ページのOGPデフォルトは`public/logo.png`を直接使用、詳細は[`og/README.md`](og/README.md)参照)。2026-10-07のHome再構成で`teasers/service.jpg`は未使用になり、`people/ceo.jpg`はHomeの会社概要で丸型の小さい写真として使う形に変わった。

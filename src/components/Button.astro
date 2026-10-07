@@ -1,13 +1,14 @@
 ---
-type Variant = 'outline' | 'solid' | 'solid-footer' | 'dark' | 'muted';
+type Variant = 'outline' | 'outline-light' | 'solid' | 'solid-footer' | 'dark' | 'muted';
 
 interface Props {
   href: string;
   variant?: Variant;
+  external?: boolean;
   class?: string;
 }
 
-const { href, variant = 'solid', class: className } = Astro.props;
+const { href, variant = 'solid', external = false, class: className } = Astro.props;
 
 // Only structure + color live here. Padding/gap/radius/font-size/transition/press-scale
 // all vary by placement in the handoff (nav CTA vs hero CTA vs teaser link), so callers
@@ -16,6 +17,8 @@ const base = 'inline-flex items-center justify-center whitespace-nowrap font-bol
 
 const variants: Record<Variant, string> = {
   outline: 'border-[1.5px] border-accent text-accent hover:bg-accent-bg',
+  // `outline` on the dark (bg-ink) panels: accent-blue text there is only ~2.6:1.
+  'outline-light': 'border-[1.5px] border-white/40 text-white hover:bg-white/10',
   solid: 'bg-accent text-white hover:bg-accent-hover',
   'solid-footer': 'bg-accent text-white hover:bg-accent-hover-footer',
   dark: 'bg-ink text-white hover:bg-black',
@@ -23,7 +26,12 @@ const variants: Record<Variant, string> = {
 };
 ---
 
-<a href={href} class:list={[base, variants[variant], className]}>
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={[base, variants[variant], className]}
+>
   <slot name="icon" />
   <slot />
 </a>

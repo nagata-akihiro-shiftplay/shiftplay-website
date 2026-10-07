@@ -4,26 +4,15 @@ import GhostHeading from '../components/GhostHeading.astro';
 import FormField from '../components/form/FormField.astro';
 import Input from '../components/form/Input.astro';
 import Textarea from '../components/form/Textarea.astro';
-import RadioGroup from '../components/form/RadioGroup.astro';
 import PrivacyAgreementCheckbox from '../components/form/PrivacyAgreementCheckbox.astro';
 import SubmitButton from '../components/form/SubmitButton.astro';
 import FormErrorBanner from '../components/form/FormErrorBanner.astro';
 import FormSuccessPanel from '../components/form/FormSuccessPanel.astro';
-
-const inquiryOptions = [
-  '生成AI法人研修について',
-  '生成AI伴走型コンサルティングについて',
-  '生成AI顧問サービスについて',
-  'HP制作について',
-  '代表 永田への登壇依頼',
-  '業務提携・営業について',
-  'その他',
-];
 ---
 
 <BaseLayout
   title="お問い合わせ｜株式会社ShiftPlay"
-  description="株式会社ShiftPlayへのお仕事のご依頼やご質問はこちらからお気軽にお問い合わせください。"
+  description="ホームページ制作やAI活用支援について、お気軽にご相談ください。株式会社ShiftPlayのお問い合わせフォームです。"
 >
   <section class="container-form section-px pt-[clamp(36px,6vw,64px)] pb-[clamp(56px,7vw,88px)]">
     <GhostHeading
@@ -31,13 +20,14 @@ const inquiryOptions = [
       label="お問い合わせ"
       watermarkClass="text-[clamp(44px,9vw,92px)]"
       labelRowClass="mb-7"
+      headingLevel="h1"
     />
 
     <div data-form-root>
       <div data-form-content>
-        <h1 class="m-0 mb-5 text-[19px] leading-[1.7] font-extrabold">
-          お仕事のご依頼やご質問などお気軽にお問い合わせください。
-        </h1>
+        <p class="m-0 mb-5 text-[19px] leading-[1.7] font-extrabold">
+          ホームページ制作やAI活用支援について、お気軽にご相談ください。
+        </p>
         <p class="text-muted m-0 mb-9 text-sm leading-[1.9]">
           内容を確認後、担当者よりご連絡させていただきます。<br
           />また、お客様のご利用環境、もしくは迷惑メール対策等の設定により届かない場合がございます。<br
@@ -53,7 +43,7 @@ const inquiryOptions = [
           <input type="hidden" name="_subject" value="お問い合わせフォーム" />
           <FormErrorBanner />
 
-          <FormField label="会社名" for="company">
+          <FormField label="会社名または屋号（任意）" for="company">
             <Input name="company" placeholder="例）株式会社ShiftPlay" autocomplete="organization" />
           </FormField>
 
@@ -71,16 +61,12 @@ const inquiryOptions = [
             />
           </FormField>
 
-          <FormField label="電話番号" for="phone" required>
-            <Input type="tel" name="phone" placeholder="09012341234" autocomplete="tel" required />
+          <FormField label="題名（任意）" for="subject">
+            <Input name="subject" placeholder="お問い合わせの件名" />
           </FormField>
 
-          <FormField label="お問い合わせの種類" required labelRowClass="mb-3.5" fieldset>
-            <RadioGroup name="inquiryType" options={inquiryOptions} required />
-          </FormField>
-
-          <FormField label="お問い合わせ内容" for="message" required>
-            <Textarea name="message" placeholder="お問い合わせ内容をご入力ください" required />
+          <FormField label="ご相談内容" for="message" required>
+            <Textarea name="message" placeholder="ご相談内容をご入力ください" required />
           </FormField>
 
           <PrivacyAgreementCheckbox />

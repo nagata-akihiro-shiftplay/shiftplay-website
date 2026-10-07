@@ -42,9 +42,6 @@ const mobileCtaBase =
           </a>
         ))
       }
-      <Button href="/download" variant="outline" class={`${navCtaBase} px-[18px]`}>
-        <Icon slot="icon" name="download" />資料ダウンロード
-      </Button>
       <Button href="/contact" variant="solid" class={`${navCtaBase} px-5`}>
         <Icon slot="icon" name="mail" />お問い合わせ
       </Button>
@@ -81,8 +78,7 @@ const mobileCtaBase =
         </a>
       ))
     }
-    <div class="mt-[14px] flex flex-row flex-nowrap gap-[10px]">
-      <Button href="/download" variant="outline" class={mobileCtaBase}> 資料ダウンロード </Button>
+    <div class="mt-[14px] flex">
       <Button href="/contact" variant="solid" class={mobileCtaBase}> お問い合わせ </Button>
     </div>
   </div>
@@ -100,11 +96,20 @@ const mobileCtaBase =
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  toggle?.addEventListener('click', () => {
+  const setMenuOpen = (open: boolean) => {
     if (!panel) return;
-    const willOpen = panel.classList.contains('hidden');
-    panel.classList.toggle('hidden', !willOpen);
-    panel.classList.toggle('flex', willOpen);
-    toggle.setAttribute('aria-expanded', String(willOpen));
+    panel.classList.toggle('hidden', !open);
+    panel.classList.toggle('flex', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle?.addEventListener('click', () => {
+    setMenuOpen(panel?.classList.contains('hidden') ?? false);
+  });
+
+  // Nav items are same-page anchors on Home (/#services), which don't reload the page,
+  // so the panel would otherwise stay open over the section it just scrolled to.
+  panel?.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) setMenuOpen(false);
   });
 </script>

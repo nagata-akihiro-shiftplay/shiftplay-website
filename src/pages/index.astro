@@ -1,18 +1,69 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import HeroVisual from '../components/HeroVisual.astro';
-import HomeTeaser from '../components/HomeTeaser.astro';
+import HomeSectionHeading from '../components/HomeSectionHeading.astro';
+import ProfileRow from '../components/ProfileRow.astro';
+import RevealOnScroll from '../components/RevealOnScroll.astro';
 import Divider from '../components/Divider.astro';
+
+const instagramUrl = 'https://www.instagram.com/akihirovlog_/';
 
 const heroCta =
   'ease-[ease] gap-2 rounded-button py-3.5 text-[15px] transition-transform duration-100 active:scale-[0.97]';
+
+// Keeps anchor targets (/#services, /#company) clear of the sticky header.
+const sectionClass = 'container-full section-px scroll-mt-28 py-[clamp(28px,5vw,56px)]';
+
+const services = [
+  {
+    label: '01 / ホームページ制作',
+    title: 'ホームページ制作',
+    description: '会社やサービスの魅力がきちんと伝わる、見やすく使いやすいWebサイトを制作します。',
+    href: '/services/website',
+    dark: true,
+  },
+  {
+    label: '02 / AI活用支援',
+    title: 'その他AI支援',
+    description: 'AI導入・業務効率化・文章作成など、日々の仕事を軽くする仕組みづくりを伴走します。',
+    href: '/services/ai',
+    dark: false,
+  },
+];
+
+const profile = [
+  { label: '社名', value: '株式会社ShiftPlay（シフトプレイ）' },
+  { label: '代表', value: '永田晃大' },
+  { label: '設立', value: '2026年4月' },
+  { label: '事業内容', value: 'ホームページ制作 / AI活用支援' },
+  { label: '営業時間', value: '10:00 - 19:00' },
+];
+
+const reasons = [
+  {
+    num: '01',
+    title: 'AIでつくるをもっと速く',
+    body: '企画からデザイン・実装・検証まで、AIエージェントとの協働を前提に制作工程を設計。開発プロセスを効率化し、制作期間の短縮とコストの最適化につなげます。',
+  },
+  {
+    num: '02',
+    title: '意思決定も、実行も、スピーディーに',
+    body: '窓口は代表が直接担当。意思決定が速く、コミュニケーションもスムーズ。公開後の更新や相談まで、一貫して同じ担当者がサポートします。',
+  },
+  {
+    num: '03',
+    title: 'つくって終わらない、AI活用支援',
+    body: 'Web制作だけでなく、AI導入や業務効率化まで支援。納品物をつくるだけでなく、その先の業務や働き方の改善を目指します。',
+  },
+];
 ---
 
 <BaseLayout
-  title="株式会社ShiftPlay｜生成AI研修・導入支援コンサルティング"
-  description="生成AIを活用した研修・導入支援を通じて、企業の生産性向上に伴走するShiftPlayのコーポレートサイトです。"
+  title="株式会社ShiftPlay｜AIを活用したホームページ制作・AI活用支援"
+  description="株式会社ShiftPlayは、AIエージェントを活用してホームページ制作・AI活用支援を行う会社です。スピードと柔軟性を強みに、中小事業者・個人事業主のアイデアを最適な形で実現します。"
 >
   <section
     class="container-full section-px flex flex-wrap items-stretch gap-[clamp(32px,5vw,56px)] pt-[clamp(32px,6vw,60px)] pb-[clamp(40px,6vw,68px)]"
@@ -23,20 +74,19 @@ const heroCta =
       <h1
         class="m-0 text-[clamp(32px,4.8vw,54px)] leading-[1.28] font-extrabold tracking-[-0.01em]"
       >
-        働き方をシフトして<br />やりたいことに<br />時間を使おう!
+        働き方を<br /><span class="text-accent">Shift</span>して<br />毎日をもっと<br /><span
+          class="text-accent">Playful</span
+        >に！
       </h1>
-      <p class="m-0 text-[clamp(17px,2vw,21px)] font-bold tracking-[0.02em]">
-        〜Shift Your Work, Play Your Life.〜
-      </p>
-      <p class="text-muted m-0 text-base leading-[1.9]">
-        生成AIを活用した研修・導入支援を通じて、<br />企業の生産性向上に伴走します。
+      <p class="text-muted m-0 max-w-[34em] text-base leading-[1.9]">
+        株式会社ShiftPlayは、AIエージェントを活用してホームページ制作・AI活用支援を行う会社です。AIの力で開発プロセスを効率化し、スピードと柔軟性を強みに、中小事業者・個人事業主のアイデアを最適な形で実現します。
       </p>
       <div class="mt-1.5 flex flex-wrap gap-3.5">
-        <Button href="/download" variant="outline" class={`${heroCta} px-6`}>
-          <Icon slot="icon" name="download" size={16} />資料ダウンロード
-        </Button>
         <Button href="/contact" variant="solid" class={`${heroCta} px-[26px]`}>
           <Icon slot="icon" name="mail" size={16} />お問い合わせ
+        </Button>
+        <Button href="#services" variant="outline" class={`${heroCta} px-6`}>
+          事業内容を見る
         </Button>
       </div>
     </div>
@@ -49,33 +99,153 @@ const heroCta =
 
   <Divider containerClass="container-full" />
 
-  <HomeTeaser
-    eyebrow="SERVICE"
-    subLabel="事業内容"
-    heading="生成AIを、企業の力に。"
-    body="生成AI研修の提供から、自社業務への導入支援、<br />活用定着まで一貫して伴走します。"
-    ctaLabel="事業内容を見る"
-    ctaHref="/service"
-    imageSrc="/images/teasers/service.jpg"
-    imageAlt="生成AIを活用した研修・コンサルティング・業務自動化などのソリューションイメージ"
-    imageWidth={1200}
-    imageHeight={800}
-    imageLoading="eager"
-    imageFetchpriority="high"
-  />
+  <RevealOnScroll as="section" id="services" class={sectionClass}>
+    <HomeSectionHeading
+      eyebrow="SERVICE"
+      title="サービス"
+      lead="AIの力で、アイデアを最速でかたちに。"
+    />
+    <div class="mt-[clamp(24px,4vw,40px)] grid gap-5 min-[701px]:grid-cols-2">
+      {
+        services.map((service) => (
+          <a
+            href={service.href}
+            class:list={[
+              'rounded-card flex flex-col gap-3 p-[clamp(24px,3.5vw,36px)] no-underline transition-[translate,scale,box-shadow] duration-200 ease-out hover:shadow-[0_12px_30px_rgba(20,22,28,0.08)] active:scale-[0.98] motion-safe:hover:-translate-y-[3px]',
+              service.dark ? 'bg-ink text-white' : 'border-border text-ink border bg-white',
+            ]}
+          >
+            <span
+              class:list={[
+                'text-xs font-bold tracking-[0.08em]',
+                service.dark ? 'text-disabled' : 'text-accent',
+              ]}
+            >
+              {service.label}
+            </span>
+            <h3 class="m-0 text-[clamp(20px,2.4vw,24px)] font-extrabold">{service.title}</h3>
+            <p
+              class:list={[
+                'm-0 text-sm leading-[1.8]',
+                service.dark ? 'text-disabled' : 'text-muted',
+              ]}
+            >
+              {service.description}
+            </p>
+            <Icon
+              name="arrow-right"
+              size={18}
+              class={service.dark ? 'mt-auto self-end text-white' : 'text-accent mt-auto self-end'}
+            />
+          </a>
+        ))
+      }
+    </div>
+  </RevealOnScroll>
 
   <Divider containerClass="container-full" />
 
-  <HomeTeaser
-    eyebrow="ABOUT"
-    subLabel="会社情報"
-    heading="人はもっと創造的になれる。"
-    body="AIは、仕事を奪うものではありません。<br />人がより創造的な仕事に集中するためのパートナーです。<br /><br />ShiftPlayは、企業ごとの業務や課題に合わせた生成AI活用をご提案し、研修から導入、定着まで伴走します。<br />AIを導入することではなく、働き方を変えることが私たちの使命です。"
-    ctaLabel="会社情報を見る"
-    ctaHref="/company"
-    imageSrc="/images/people/ceo.jpg"
-    imageAlt="代表取締役 永田晃大"
-    imageWidth={675}
-    imageHeight={900}
-  />
+  <RevealOnScroll as="section" id="company" class={sectionClass}>
+    <HomeSectionHeading eyebrow="COMPANY" title="会社概要" />
+    <div
+      class="mt-[clamp(28px,4vw,44px)] flex flex-col gap-10 min-[861px]:flex-row min-[861px]:gap-[clamp(40px,5vw,72px)]"
+    >
+      <div class="min-[861px]:flex-[0_1_400px]">
+        <Image
+          src="/images/people/ceo.jpg"
+          alt="代表取締役 永田晃大"
+          width={600}
+          height={600}
+          loading="lazy"
+          class="h-[120px] w-[120px] rounded-full object-cover"
+        />
+        <p class="m-0 mt-5 flex flex-wrap items-baseline gap-x-3">
+          <span class="text-xl font-extrabold">永田晃大</span>
+          <span class="text-faint text-xs">代表取締役</span>
+        </p>
+        <p class="text-muted m-0 mt-4 text-sm leading-[1.9]">
+          ソフトウェアエンジニアとしてキャリアをスタートし、個人でブログやInstagramでの情報発信を開始。その後、2026年に株式会社ShiftPlayを設立。現在はAIエージェントを活用したホームページ制作や、AI導入・業務効率化の支援に取り組んでいます。日々の活動や挑戦はInstagramで発信中。
+        </p>
+        <Button
+          href={instagramUrl}
+          external
+          variant="outline"
+          class="rounded-button mt-5 gap-2 px-[18px] py-3 text-sm"
+        >
+          <Icon slot="icon" name="instagram" size={17} />Instagram：@akihirovlog_<Icon
+            name="arrow-up-right"
+            size={14}
+          />
+        </Button>
+      </div>
+      <div
+        class="border-border rounded-block min-w-0 flex-1 border bg-white px-[clamp(24px,4vw,36px)] py-[clamp(4px,1vw,10px)] *:last:border-b-0 min-[861px]:self-start"
+      >
+        {profile.map((row) => <ProfileRow label={row.label} value={row.value} />)}
+      </div>
+    </div>
+  </RevealOnScroll>
+
+  <Divider containerClass="container-full" />
+
+  <RevealOnScroll as="section" class={sectionClass}>
+    <HomeSectionHeading eyebrow="REASON" title="選ばれる理由" />
+    <ol
+      class="m-0 mt-[clamp(28px,4vw,44px)] grid list-none gap-8 p-0 min-[861px]:grid-cols-3 min-[861px]:gap-6"
+    >
+      {
+        reasons.map((reason) => (
+          <li class="border-ink border-t pt-5">
+            <div class="text-accent text-2xl font-extrabold">{reason.num}</div>
+            <h3 class="m-0 mt-3 text-[17px] leading-[1.5] font-extrabold">{reason.title}</h3>
+            <p class="text-muted m-0 mt-2 text-sm leading-[1.9]">{reason.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </RevealOnScroll>
+
+  <RevealOnScroll
+    as="section"
+    class="container-full section-px pt-[clamp(28px,5vw,56px)] pb-[clamp(40px,6vw,72px)]"
+  >
+    <div
+      class="border-border rounded-panel flex flex-col gap-8 border bg-white p-[clamp(28px,5vw,56px)] min-[861px]:flex-row min-[861px]:items-center min-[861px]:gap-12"
+    >
+      <div class="min-w-0 flex-1">
+        <HomeSectionHeading
+          eyebrow="CONTACT"
+          title="お問い合わせ"
+          lead="まずは、お気軽にご相談ください。"
+        />
+        <p class="text-muted m-0 mt-5 text-sm leading-[1.9]">
+          ホームページを作りたい・改修したい、業務にAIを取り入れたい、何から始めればいいか分からない。そんな段階でも大丈夫です。課題やアイデアをお聞きしながら、最適な進め方を一緒に考えます。
+        </p>
+      </div>
+      <div
+        class="border-border bg-page rounded-card border p-[clamp(20px,3vw,28px)] min-[861px]:w-[340px]"
+      >
+        <p class="text-muted m-0 text-[13px] leading-[1.8]">
+          受付時間　24時間<br />通常1営業日以内にご返信します。
+        </p>
+        <div class="mt-5 flex flex-col gap-3">
+          <Button
+            href="/contact"
+            variant="solid"
+            class="rounded-button gap-2 px-5 py-3.5 text-[15px] transition-transform duration-100 active:scale-[0.97]"
+          >
+            <Icon slot="icon" name="mail" size={16} />お問い合わせフォーム
+          </Button>
+          <Button
+            href={instagramUrl}
+            external
+            variant="outline"
+            class="rounded-button gap-2 px-5 py-3.5 text-[15px] transition-transform duration-100 active:scale-[0.97]"
+          >
+            Instagram DMで相談する<Icon name="arrow-up-right" size={15} />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </RevealOnScroll>
 </BaseLayout>
