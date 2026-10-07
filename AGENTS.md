@@ -141,6 +141,7 @@ Selectコンポーネントは未作成(`<select>`の使用箇所が無い)。�
 - 同一要素に複数のpadding/gap系ユーティリティを混在させない(`flex-1` + `basis-[...]`も避け、`flex-[1_1_380px]`のような単一の`flex`ショートハンド任意値を使う)。Tailwindの生成CSSの出力順序次第でどちらが勝つか不安定になるため。
 - `prettier-plugin-tailwindcss`導入済み。`pnpm format`(`prettier --write .`)でクラス順序は自動整列される。手でクラス順を気にする必要はない。
 - important修飾子はv4の記法(末尾`!`、例: `hidden!`)を使う(v3の先頭`!`ではない)。
+- **v4では`translate-*`は`translate`プロパティ、`scale-*`は`scale`プロパティを動かす(`transform`ではない)**。`transition-[...]`の任意値リストには`transform`ではなく`translate`/`scale`を書くこと(例: `transition-[opacity,translate]`、`transition-[background-color,scale]`)。`transform`と書くと動きがアニメーションせず一瞬で切り替わる(2026-10-08、スクロールリビール・ページロード・ボタン押下・カードのホバーがすべてこの状態だったのを修正)。素の`transition-transform`はv4ではtranslate/scale/rotateも含むので問題ない。
 
 ## 5. コンポーネント設計ルール
 
@@ -172,7 +173,7 @@ Selectコンポーネントは未作成(`<select>`の使用箇所が無い)。�
 - `<head>`共通部分は`BaseLayout.astro`にまとめている(charset/viewport/favicon/title/description/canonical/OGP/Twitter Card/Google Fonts)。ページ固有のtitle/description/OGP画像は`BaseLayout`の`Props`(`title`/`description`/`ogImage?`/`noindex?`)で渡す。`ogImage`はデフォルト値`/images/og/og-image.png`を持つため、個別指定しなくても全ページのog:image/twitter:imageに反映される(2026-07-22、OGP画像納品に伴い変更。ページ固有の画像を出したい場合のみ`ogImage`propで上書きする)。
 - クライアントJSはAstro Islands(`client:load`等)を使わず、通常の`<script>`タグで実装する。
 - 画像は`astro:assets`の`<Image />`を使い、`width`/`height`明示、hero画像のみ`loading="eager"`、その他は`loading="lazy"`。alt必須。
-- ESLintは**flat config**(`eslint.config.mjs`)。ESLint 10 + `typescript-eslint` + `eslint-plugin-astro` + `eslint-config-prettier`の構成で、ESLintコア純正の `defineConfig`(`eslint/config`から import)でまとめている。`typescript-eslint`の`tseslint.config()`ヘルパーは非推奨警告が出るため使わないこと。`no-irregular-whitespace`はoffにしている(サイト全体の日本語コピーで全角スペースを意図的に使っている箇所があるため、Privacy実装時に判明)。
+- ESLintは**flat config**(`eslint.config.mjs`)。ESLint 10 + `typescript-eslint` + `eslint-plugin-astro` + `eslint-config-prettier`の構成で、ESLintコア純正の `defineConfig`(`eslint/config`から import)でまとめている。`typescript-eslint`の`tseslint.config()`ヘルパーは非推奨警告が出るため使わないこと。`no-irregular-whitespace`はoffにしている(サイト全体の日本語コピーで全角スペースを意図的に使っている箇所があるため、Privacy実装時に判明)。`.astro`のフロントマター用パーサーは`parserOptions.parser: tseslint.parser`で明示している(pnpmだと`eslint-plugin-astro`が`@typescript-eslint/parser`を自動検出できず、2026-10-08までTypeScriptを含む全`.astro`で構文エラーになり、`npm run lint`が実質機能していなかった)。`.claude/`(Claude Codeの作業用コピー)と`design-handoff-docs/`(未追跡の参考資料)は対象外にしている。
 - `pnpm approve-builds`相当の設定は`pnpm-workspace.yaml`の`allowBuilds`に書く(現状`esbuild: true`のみ)。新しい依存で同様の警告が出たら同ファイルに追記する。
 - 開発サーバー確認は `.claude/launch.json`(このディレクトリ直下に配置済み、`npm run dev` / port 4321)を使い、Browser paneの`preview_start({name:"shiftplay-astro"})`でプレビューする。
 - ページロードfade-in(README: 全ページ共通、root wrapperが`opacity:0,translateY(10px)`→mount1フレーム後に`opacity:1,translateY(0)`, 0.5s)は**`BaseLayout.astro`に実装済み**(`#page-root`ラッパー+`requestAnimationFrame`)。ページ側で個別に実装する必要はない。ページ遷移(Astro View Transitions)自体の導入は未決定。導入する場合も`BaseLayout.astro`に一箇所だけ追加すること。
